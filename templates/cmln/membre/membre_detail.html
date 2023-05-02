@@ -1,0 +1,104 @@
+{% extends "partials/base.html" %}
+
+{% block content%}
+<div class="card">
+    <div class="card-header">
+        Coordonées
+        <a href="{% url 'update_membre' membre.id %}" class="close">
+            <i class="fas fa-pen"></i>
+        </a>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col">
+                <strong>Nom</strong>: {{membre.nom}} <br>
+            </div>
+            
+            <div class="col">
+                <strong>Prenom</strong>: {{membre.prenom}} <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <strong>Email</strong>: {{membre.email}} <br>
+            </div>
+            
+            <div class="col">
+                <strong>Téléphone</strong>: {{membre.telephone}} <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <strong>Adresse</strong>: {{membre.get_adresse_complete_str}} <br>
+            </div>
+
+            <div class="col">
+                <strong>Pays</strong>: {{membre.extension.pays}} <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <strong>Commentaire</strong>: {{membre.commentaire}} <br>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-header">
+        Afiliation
+        <a href="{% url 'update_membre' membre.id %}" class="close">
+            <i class="fas fa-pen"></i>
+        </a>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col">
+                <strong>Nom</strong>: {{membre.nom}} <br>
+            </div>
+            
+            <div class="col">
+                <strong>Prenom</strong>: {{membre.prenom}} <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <strong>Email</strong>: {{membre.email}} <br>
+            </div>
+            
+            <div class="col">
+                <strong>Téléphone</strong>: {{membre.telephone}} <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <strong>Adresse</strong>: {{membre.get_adresse_complete_str}} <br>
+            </div>
+
+            <div class="col">
+                <strong>Pays</strong>: {{membre.extension.pays}} <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <strong>Commentaire</strong>: {{membre.commentaire}} <br>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock%}

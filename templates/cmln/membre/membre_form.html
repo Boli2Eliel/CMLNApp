@@ -1,0 +1,34 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% if object %}
+<h3> Modification de {{object.prenom}} {{object.nom}}</h3>
+{% else %}
+<div class="container">
+    <h3>Nouveau membre </h3>
+</div>
+{% endif %}
+
+<div class="container">
+<form method="POST">
+    {% csrf_token%}
+    {{form | crispy}}
+        <div class="row">
+
+            <div class="col">
+                {% if object %}
+                    <a href="{% url 'detail_membre' object.id %}" class="btn btn-secondary">Annuler</a>
+                {% else %}
+                    <a href="{% url 'create_membre' %}" class="btn btn-secondary">Annuler</a>
+                {% endif %}       
+            </div>
+
+            <div class="col">
+                <input class="btn btn-info" type="submit">
+            </div>
+
+        </div>
+</form>
+</div>
+{% endblock content %}
