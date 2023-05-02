@@ -11,7 +11,7 @@ class MembreAdmin(ImportExportModelAdmin):
     list_display = ('nom','prenom', 'email', 'get_adresse_complete_str', 'updated_at')
 
 class AerdAdmin(ImportExportModelAdmin):
-    list_display = ('nom','prenom', 'email', 'updated_at')
+    list_display = ('membre', 'situation', 'departement','extension','inactif')
 
 class ExtensionAdmin(ImportExportModelAdmin):
     list_display = ('nom', 'description', 'get_nom_description_str', 'pays')

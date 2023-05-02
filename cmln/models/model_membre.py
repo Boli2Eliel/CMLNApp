@@ -1,6 +1,20 @@
+from enum import Enum
+
 from django.core.validators import RegexValidator
 from django_countries.fields import CountryField
 from django.db import models
+
+class SexeChoice(Enum):
+    F = "Féminin"
+    M = "Masculin"
+
+class OuiNonChoice(Enum):
+    OUI = "OUI"
+    NON = "NON"
+
+class SituationChoice(Enum):
+    NOUVEAU = "Nouvel arrivant"
+    INTEGRATION = "En cours d'intégration - N1"
 
 class Extension(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Date d'ajout", blank=True, null=True)
@@ -21,7 +35,14 @@ class Membre(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     prenom = models.CharField( max_length=100, blank=True, null=True)
     nom = models.CharField( max_length=100, blank=True, null=True)
+    sexe = models.CharField(max_length=20, blank=True, null=True, verbose_name="Sexe",
+                            choices=[(tag.name, tag.value) for tag in SexeChoice])
     date_naissance = models.DateField(null=True, blank=True)
+    date_arrivee = models.DateField(auto_now_add=True, verbose_name="Date d'arrivée à CMLN", blank=True, null=True)
+    baptise = models.CharField(max_length=20, blank=True, null=True, verbose_name="Baptisé",
+                            choices=[(tag.name, tag.value) for tag in OuiNonChoice])
+    situation = models.CharField(max_length=100, blank=True, null=True, verbose_name="Situation actuelle",
+                                 choices=[(tag.name, tag.value) for tag in SituationChoice])
     email = models.CharField(max_length=150, blank=True, null=True)
     adresse = models.CharField(max_length=100, blank=True, null=True)
     ville = models.CharField(max_length=100, blank=True, null=True)
@@ -41,3 +62,9 @@ class Membre(models.Model):
 
     def get_extension_str(self):
         return f"{self.extension.description}"
+
+    def is_from_nouveau(self):
+        return self.situation == SituationChoice.NOUVEAU.name
+
+    def is_from_integration(self):
+        return self.situation == SituationChoice.INTEGRATION.name
