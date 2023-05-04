@@ -35,95 +35,96 @@
 
     <title>CMLN</title>
     <style>
-        #backgd{
-      background: url("{% static 'img/Amc1.jpg' %}");background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: 100% 100%;
-      }
+    #backgd{
+    background: url("{% static 'img/Amc1.jpg' %}");background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    }
 
     </style>
 
-   
-  </head>
-  <body>
 
-<!-- SIDEBAR MENU-->
-<div class="sidebar-container">
+</head>
+<body>
 
-  <div class="sidebar-logo bg-white">
-      <a class="navbar-brand text-white"  href="{% url 'home' %}">
-      <img src="{% static 'img/Logo-CMLN.png' %}" alt="CMLN" style="width: 150px; padding-left: 30px;" />
-  </a>
-  </div>
-  
-  <ul class="sidebar-navigation">
+    <!-- SIDEBAR MENU-->
+    <div class="sidebar-container">
 
-      <li class="header">Accueil</li>
-          <li class="{% if selected == 'home' %}active{% endif %}">
-          <a href="{% url 'home' %}">
-              <i class="fa fa-home" aria-hidden="true"></i> Home
-          </a>
-          </li>
-      
-          <li>
-          <a href="#">
-              <i class="fa fa-tachometer-alt" aria-hidden="true"></i> Tableau de bord
-          </a>
-      </li>
+    <div class="sidebar-logo bg-white">
+        <a class="navbar-brand text-white"  href="{% url 'home' %}">
+        <img src="{% static 'img/Logo-CMLN.png' %}" alt="CMLN" style="width: 150px; padding-left: 30px;" />
+    </a>
+    </div>
+    
+    <ul class="sidebar-navigation">
 
-      <li class="header">Gestion</li>
-  
-          <li class="{% if selected == 'membres' %}active{% endif %}">
-              <a href="{% url 'membres' %}">
-                  <i class="fa fa-users" aria-hidden="true"></i> Membres
-              </a>
-          </li>
-  
-          <li>
-              <a href="{% url 'aerds' %}">
-                  <i class="fa fa-network-wired" aria-hidden="true"></i> AERDS
-              </a>
-          </li>
-      
-          <li>
-              <a href="#">
-                  <i class="fa fa-info-circle" aria-hidden="true"></i> Information
-              </a>
-          </li>
-  
-      <li class="header">Mon compte</li>
-  
-          <li>
-              <a href="{% url 'logout' %}">
-                  <i class="fas fa-power-off" aria-hidden="true"></i> Déconnexion
-              </a>
-          </li>
-  
-          <li>
-              <a href="{% url 'password_change' %}">
-                  <i class="fas fa-key" aria-hidden="true"></i> Changer le mot de passe
-              </a>
-          </li>
+    <li class="header">Accueil</li>
+        <li class="{% if selected == 'home' %}active{% endif %}">
+        <a href="{% url 'home' %}">
+            <i class="fa fa-home" aria-hidden="true"></i> Home
+        </a>
+        </li>
+    
+        <li>
+        <a href="#">
+            <i class="fa fa-tachometer-alt" aria-hidden="true"></i> Tableau de bord
+        </a>
+    </li>
 
-  </ul>
-  </div>
+    <li class="header">Gestion</li>
 
-  <!-- END SIDEBAR MENU-->
+        <li class="{% if selected == 'membres' %}active{% endif %}">
+            <a href="{% url 'membres' %}">
+                <i class="fa fa-users" aria-hidden="true"></i> Membres
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'aerds' %}">
+                <i class="fa fa-network-wired" aria-hidden="true"></i> AERDS
+            </a>
+        </li>
+    
+        <li>
+            <a href="#">
+                <i class="fa fa-info-circle" aria-hidden="true"></i> Information
+            </a>
+        </li>
+
+    <li class="header">Mon compte</li>
+  
+        <li>
+            <a href="{% url 'logout' %}">
+                <i class="fas fa-power-off" aria-hidden="true"></i> Déconnexion
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'password_change' %}">
+                <i class="fas fa-key" aria-hidden="true"></i> Changer le mot de passe
+            </a>
+        </li>
+
+    </ul>
+    </div>
+
+<!-- END SIDEBAR MENU-->
 
     <div class="content-container">
 
         
 
-          <!-- Main component for a primary marketing message or call to action -->
+        <!-- Main component for a primary marketing message or call to action -->
 
-              {% block content %} {% endblock %}
+            {% block content %} {% endblock %}
 
     </div>
-  
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <script src="{% static 'js/base.js' %}"></script>
 
     {% block script %} {% endblock %}
 
-  </body>
+</body>
 </html>

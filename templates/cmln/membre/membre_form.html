@@ -11,24 +11,39 @@
 {% endif %}
 
 <div class="container">
-<form method="POST">
-    {% csrf_token%}
-    {{form | crispy}}
-        <div class="row">
 
-            <div class="col">
-                {% if object %}
-                    <a href="{% url 'detail_membre' object.id %}" class="btn btn-secondary">Annuler</a>
-                {% else %}
-                    <a href="{% url 'create_membre' %}" class="btn btn-secondary">Annuler</a>
-                {% endif %}       
-            </div>
+<div class="col-sm-6">
 
-            <div class="col">
-                <input class="btn btn-info" type="submit">
-            </div>
+    <div class="card">
+        <div class="card-header">
 
         </div>
-</form>
+
+        <div class="card-body ">
+            <form method="POST">
+                {% csrf_token%}
+                {{form | crispy}}
+                <div class="row">
+
+                    <div class="col">
+                        {% if object %}
+                            <a href="{% url 'detail_membre' object.id %}" class="btn btn-secondary">Annuler</a>
+                        {% else %}
+                            <a href="{% url 'create_membre' %}" class="btn btn-secondary">Annuler</a>
+                        {% endif %}       
+                    </div>
+
+                    <div class="col">
+                        <input class="btn btn-info" type="submit">
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
 </div>
 {% endblock content %}
+
+{% block script %} {{ form.media}} {% endblock %}

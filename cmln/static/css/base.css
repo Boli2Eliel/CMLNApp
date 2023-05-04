@@ -90,3 +90,7 @@
     background-color: #38a1e7;
     font-style: italic;
   }
+
+  label.required{
+    font-weight: bold;
+  }

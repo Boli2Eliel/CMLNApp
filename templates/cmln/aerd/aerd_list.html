@@ -50,8 +50,9 @@
                         <tr>
                             <th>#ID</th>
                             <th>Noms et prenom</th>
-                            <th>Situation actuelle</th>
-                            <th>Formateur</th>
+                            <th>Fonction</th>
+                            <th>Situation</th>
+                            <th>Departement</th>
                             <th>Extension</th>
                             <th>Ville</th>
                         </tr>
@@ -59,19 +60,21 @@
                     <tbody id="mytable">
                         {% for aerd in aerd_list %}
                         <tr>
-                            <td><a href="#">{{aerd.id}}</a></td>
-                            <td>{{aerd.nom}} {{aerd.prenom}}</td>
-                            <td>{{aerd.get_emplacement_display}}</td>
-                            <td>{{aerd.formateur|default:""}}</td>
+                            <td>{{aerd.id}}</td>
+                            <td><a href="{% url 'detail_aerd' aerd.id %}">{{aerd.membre.nom}} {{aerd.membre.prenom}}</a></td>
+                            <td>{{aerd.position}}</td>
+                            <!--td>{{aerd.formateur|default:""}}</!--td-->
+                            <td>{{aerd.situation}}</td>
+                            <td>{{aerd.departement}}</td>
                             <td>{{aerd.extension.nom}}</td>
-                            <td>{{aerd.formateur.ville}}</td>
+                            <td>{{aerd.membre.ville}}</td>
                         </tr> 
                         {% endfor %}     
                     </tbody>
                 </table>
         
                 <div class="text-right">
-                    <a href="#" class="btn btn-info">Ajouter un aerd</a>
+                    <a href="{% url 'create_aerd' %}" class="btn btn-info">Ajouter un aerd</a>
                 </div>
         
                 <div class="clearfix">

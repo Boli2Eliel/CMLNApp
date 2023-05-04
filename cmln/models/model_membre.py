@@ -21,8 +21,8 @@ class Extension(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Date de mise à jour", blank=True, null=True)
     nom = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
-    ville = models.CharField(max_length=150)
-    pays = CountryField(blank_label='(select country)')
+    ville = models.CharField(max_length=150, null=True, blank=True)
+    pays = CountryField(blank_label='(select country)', null=True, blank=True)
 
     def __str__(self):
         return f"{self.nom}/{self.description}"
@@ -38,9 +38,10 @@ class Membre(models.Model):
     sexe = models.CharField(max_length=20, blank=True, null=True, verbose_name="Sexe",
                             choices=[(tag.name, tag.value) for tag in SexeChoice])
     date_naissance = models.DateField(null=True, blank=True)
-    date_arrivee = models.DateField(auto_now_add=True, verbose_name="Date d'arrivée à CMLN", blank=True, null=True)
+    date_arrivee = models.DateField(verbose_name="Date d'arrivée à CMLN", blank=True, null=True)
     baptise = models.CharField(max_length=20, blank=True, null=True, verbose_name="Baptisé",
                             choices=[(tag.name, tag.value) for tag in OuiNonChoice])
+    date_bapteme = models.DateField(verbose_name="Date de bapteme(par immersion)", null=True, blank=True)
     situation = models.CharField(max_length=100, blank=True, null=True, verbose_name="Situation actuelle",
                                  choices=[(tag.name, tag.value) for tag in SituationChoice])
     email = models.CharField(max_length=150, blank=True, null=True)
@@ -52,10 +53,13 @@ class Membre(models.Model):
     )
     telephone = models.CharField(validators=[telephone_regex], max_length=100, blank=True, null=True)
     date_inscription = models.DateField(auto_now_add=True, verbose_name="Date d'inscription", blank=True, null=True)
-    commentaire = models.CharField(max_length=500, blank=True)
+    commentaire = models.TextField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f"{self.prenom} {self.nom}"
+
+    def get_nom_complet_str(self):
+        return f"{self.prenom} , {self.nom}"
 
     def get_adresse_complete_str(self):
         return f"{self.adresse} , {self.ville}"

@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cea6a34-e886-4bae-b2f2-a0213b785626" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/cmln/forms/form_aerd.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmln/models/model_inter_tables.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmln/static/js/base.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmln/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmln/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmln/forms/form_personne.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmln/forms/form_personne.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmln/models/model_aerd.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmln/models/model_aerd.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmln/models/model_membre.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmln/models/model_membre.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmln/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/cmln/static/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmln/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmln/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmln/views/view_aerd.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmln/views/view_aerd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmlnSchool/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnSchool/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cmln/aerd/aerd_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cmln/aerd/aerd_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cmln/membre/membre_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cmln/membre/membre_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cmln/membre/membre_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cmln/membre/membre_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,15 +51,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;G:/PERSO/PopDev/DJANGO/DjangoBbizEcommerce&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "G:/PERSO/PopDev/DJANGO/CMLN/cmlnSchool",
+    "settings.editor.selected.configurable": "preferences.editor"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\PERSO\PopDev\DJANGO\CMLN\cmlnSchool\cmln\static\css" />
@@ -94,5 +107,16 @@
       <updated>1682685405605</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cmln/views/view_aerd.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

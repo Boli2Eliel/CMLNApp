@@ -1,0 +1,48 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% if object %}
+<h3> Modification de {{object.membre}}</h3>
+{% else %}
+<div class="container">
+    <h3>Ajout Aerd </h3>
+</div>
+{% endif %}
+
+<div class="container">
+
+<div class="col-sm-7">
+
+    <div class="card">
+        <div class="card-header">
+                <i class="fa fa-info-circle text-dark "> Info sur le nouveau AERD</i>
+        </div>
+
+        <div class="card-body ">
+            
+                <form method="POST">
+                    {% csrf_token%}
+                    {{form | crispy}}
+                    <div class="row">
+
+                        <div class="col">
+                            {% if object %}
+                                <a href="{% url 'detail_aerd' object.id %}" class="btn btn-secondary">Annuler</a>
+                            {% else %}
+                                <a href="{% url 'create_aerd' %}" class="btn btn-secondary">Annuler</a>
+                            {% endif %}       
+                        </div>
+
+                        <div class="col">
+                            <input class="btn btn-info" type="submit">
+                        </div>
+
+                    </div>
+                </form> 
+        </div>
+    </div>
+
+</div>
+</div>
+{% endblock content %}

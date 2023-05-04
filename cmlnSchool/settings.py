@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'cmlnSchool.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aerdapp',
+        'NAME': 'cmln_aerdapp',
         'USER': 'root',
         'PASSWORD': '',
         'HOST':'localhost',

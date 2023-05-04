@@ -59,8 +59,8 @@
                     <tbody id="mytable">
                         {% for membre in membre_list %}
                         <tr>
-                            <td><a href="{% url 'detail_membre' membre.id %}">{{membre.id}}</a></td>
-                            <td>{{membre.nom}} {{membre.prenom}}</td>
+                            <td>{{membre.id}}</td>
+                            <td><a href="{% url 'detail_membre' membre.id %}">{{membre.nom}} {{membre.prenom}}</a></td>
                             <td>{{membre.adresse}}</td>
                             <td>{{membre.telephone}}</td>
                             <td>{{membre.extension.nom}}</td>
