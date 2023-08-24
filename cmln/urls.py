@@ -1,21 +1,30 @@
-from django.contrib.auth.decorators import login_required
-from django.urls import path
-from django.views.generic import DetailView
+"""
+URL configuration for cmln project.
 
-from .models.model_aerd import Aerd
-from .models.model_membre import Membre
-from .views import view_home, view_membre, view_aerd
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', view_home.index, name="home"),
-    path('membre/', view_membre.membre_list, name="membres"),
-    path('membre/create', view_membre.CreateMembre.as_view(), name="create_membre"),
-    path('membre/update/<int:pk>', view_membre.UpdateMembre.as_view(), name="update_membre"),
-    path('membres/<int:pk>', login_required(DetailView.as_view(model=Membre, template_name="cmln/membre/membre_detail.html")), name="detail_membre"),
+    path('accounts/', include("authentication.urls")),
+    path('admin/', admin.site.urls),
+    path('', include("cmlnGestion.urls")),
+    path('', include("user.urls")),
+    path('', include("django.contrib.auth.urls")),
 
-    path('aerd/', view_aerd.aerd_list, name="aerds"),
-    path('aerd/create', view_aerd.CreateAerd.as_view(), name="create_aerd"),
-    path('aerd/update/<int:pk>', view_aerd.UpdateAerd.as_view(), name="update_aerd"),
-    path('aerds/<int:pk>', login_required(DetailView.as_view(model=Aerd, template_name="cmln/aerd/aerd_detail.html")), name="detail_aerd")
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #for display media profile cf. "MEDIA-ROOT" in settings

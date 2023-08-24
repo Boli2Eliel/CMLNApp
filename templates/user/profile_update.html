@@ -1,0 +1,51 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <!--Profilr-->
+    <div class="container">
+        <div class=""></div>
+        <div class="row my-4">
+            <div class="col-md-3">
+                
+            </div>
+            
+            <div class="col-md-6 mt-5">
+                <div class="card">
+                    <div class="card-header text-secondary text-uppercase font-weight-bold fs-5 bg-light ">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <span class="fa fa-user-circle fa-2x"></span>
+                            </span>&nbsp;&nbsp;
+                            {{user.username}} | <a href="{% url 'user-profile' %}" class="float-right ml-2"> <span class="" style="font-size: 12px; font-weight:normal; margin-left: 130px;"><i class="fa fa-arrow-right"></i> Retour vers profile</span> </a>
+                        </div>  
+                    </div>
+                    <div class="card-body bg-secondary">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="h6" style="font-style: italic;"> Profile Informations</span> 
+                                <hr>
+                                <form  method="POST" enctype="multipart/form-data"> 
+                                    <div class="form-group mb-4">
+                                        {% csrf_token %}
+                                        {{profile_form | crispy}}
+                                    </div>
+                                    <a href="{% url 'user-profile' %}" class="btn btn-danger mr-5" >Annuler</a>
+                                    <input type="submit" class="btn btn-success ml-5" value="Modifier">
+                                </form>
+                                <br />
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--EndProfile-->
+
+
+    
+
+{% endblock %}

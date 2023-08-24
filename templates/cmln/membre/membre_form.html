@@ -2,48 +2,216 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-{% if object %}
-<h3> Modification de {{object.prenom}} {{object.nom}}</h3>
-{% else %}
-<div class="container">
-    <h3>Nouveau membre </h3>
-</div>
-{% endif %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            {% if object %}
+            <div class="container text-secondary mt-5">
+            <h3><i class="fa fa-user"></i> Modification d'un <strong>Membre</strong></h3>
+            </div>
+            {% else %}
+            <div class="container text-secondary mt-5">
+                <h3> <i class="fa fa-user-plus"></i> Nouveau <strong>Membre</strong> </h3> <hr>
+            </div> 
+            {% endif %}
+            <div class="card" >
+                            <div class="card-header">
+                                    Recueil <strong>d'informations</strong> <i class="fa fa-info-circle text-info"></i> 
+                            </div>   
 
-<div class="container">
+                        <div class="card-body " style="font-size:12px;">
+                            <form method="POST">
+                                {% csrf_token%}
 
-<div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label for=""><strong> <i class="fa fa-user"></i> Nom</strong> :</label>
+                                        <span class=" bg-info " >{{form.nom}}</span> <br>
+                                    </div>
+                                    
+                                    <div class="col form-group">
+                                        <label for=""><strong><i class="fa fa-user"></i> Prenom</strong> :</label>
+                                        {{form.prenom}} <br>
+                                    </div>
+                                </div>
 
-    <div class="card">
-        <div class="card-header">
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <strong><i class="fa fa-list-alt"></i> Sexe</strong> : {{form.sexe}} <br>
+                                    </div>
+                                    
+                                    <div class="col form-group">
+                                        <strong><i class="fa fa-list-alt"></i> Baptisé</strong> : {{form.baptise}} <br>
+                                    </div>
+                                </div>
 
-        </div>
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <i class="fa fa-calendar-alt"></i> Date de naissance : {{form.date_naissance}} <br>
+                                    </div>
 
-        <div class="card-body ">
-            <form method="POST">
-                {% csrf_token%}
-                {{form | crispy}}
-                <div class="row">
+                                    <div class="col form-group">
+                                        <i class="fa fa-calendar-alt"></i> Date de baptème : {{form.date_bapteme}} <br>
+                                    </div>
+                                </div>
 
-                    <div class="col">
-                        {% if object %}
-                            <a href="{% url 'detail_membre' object.id %}" class="btn btn-secondary">Annuler</a>
-                        {% else %}
-                            <a href="{% url 'create_membre' %}" class="btn btn-secondary">Annuler</a>
-                        {% endif %}       
-                    </div>
+                                <div class="row">
+                                    <div class="col form-group" data-provide="datepicker">
+                                        <i class="fa fa-calendar-alt"></i> Date d'arrivée à CMLN : {{form.date_arrivee}} <br>
+                                    </div>
 
-                    <div class="col">
-                        <input class="btn btn-info" type="submit">
-                    </div>
+                                    <div class="col form-group">
+                                        <i class="fa fa-list"></i> Situation actuelle : {{form.situation}} <br>
+                                    </div>
 
+                                    <div class="col form-group">
+                                        <i class="fa fa-list"></i> Etat-civil : {{form.etat_civil}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    
+                                        <div class="col form-group">
+                                            <i class="fa fa-church"></i> Extension : {{form.extension }} <br>
+                                        </div>
+                                    
+                                    <div class="col form-group">
+                                        <i class="fa fa-city"></i> Ville : {{form.ville}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col form-group">
+                                        <i class="fa fa-home"></i> Adresse : {{form.adresse}} <br>
+                                    </div>
+
+                                    <div class="col form-group">
+                                        <i class="fa fa-envelope"></i> Email : {{form.email}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col form-group">
+                                        <i class="fa fa-mobile"></i> Mobile : {{form.telephone_1}} <br>
+                                    </div>
+
+                                    <div class="col form-group">
+                                        <i class="fa fa-mobile"></i> Tél. Domicile : {{form.telephone_2}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col form-group">
+                                        <label for="">Photo:</label>
+                                        {{form.profile_image}} <br>
+                                    </div>
+
+                                    <div class="col form-group">
+                                        <label for="">Commentaire:</label>
+                                        {{form.commentaire}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3 ">
+                                    
+                                    <!-- Validation or not-->                                                
+                                    <div class="col" >
+                                        {% if object %}
+                                            <a href="{% url 'detail_membre' object.id %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
+                                        {% else %}
+                                            <a href="{% url 'membres' %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
+                                        {% endif %}       
+                                    </div>
+
+                                    <div class=" col-sm-6">
+                                        <input class="btn btn-info" style="font-size:12px;" type="submit">
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-    
-</div>
-</div>
-{% endblock content %}
+    <footer></footer>
+
+{% endblock %}
 
 {% block script %} {{ form.media}} {% endblock %}
+
+
+
+
+
+
+
+<!-- RESERVE
+
+    <div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            {% if object %}
+            <div class="container text-secondary mt-5">
+            <h3><i class="fa fa-user"></i> Modification d'un <strong>Membre</strong></h3>
+            </div>
+            {% else %}
+            <div class="container text-secondary mt-5">
+                <h3> <i class="fa fa-user-plus"></i> Nouveau <strong>Membre</strong> </h3> <hr>
+            </div> 
+            {% endif %}
+
+            <div class="container mt-5">
+
+                <div class="col ">
+
+                    <form method="POST">
+                        {% csrf_token%}
+                        <div class="col-lg-8 container-fluid" style="font-size: 14px;">
+
+                            <div class="container-fluid">
+                                <div class="card">
+
+                                    <div class="card-header">
+                                        {% if object %}
+                                            <i class="fa fa-info-circle text-info"></i> Informations -- <strong>{{membre.nom}} </strong>{{membre.prenom}} 
+                                        {% else %}
+                                            Recueil <strong>d'informations</strong> <i class="fa fa-info-circle text-info"></i> 
+                                        {% endif %}
+                                    </div> 
+
+                                    <div class="card-body" style="font-size: 13px;">
+                                        {{form | crispy}}
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <div class="row mt-3 ">
+                                                    
+                                            <div class="col" >
+                                                {% if object %}
+                                                    <a href="{% url 'detail_membre' object.id %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
+                                                {% else %}
+                                                    <a href="{% url 'membres' %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
+                                                {% endif %}       
+                                            </div>
+                            
+                                            <div class=" col-sm-6">
+                                                <input class="btn btn-info" style="font-size:12px;" type="submit">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </form>
+
+                    
+-->

@@ -1,0 +1,213 @@
+<!-- # SIDEBAR -->
+<!-- SIDEBAR MENU-->
+{% load static %}
+
+
+<aside class="bd-sidebar pb-5">
+<div class="sidebar-container " style="font-size:14px;">
+
+    <div class="sidebar-logo bg-white">
+        <a class="navbar-brand text-white"  href="{% url 'home' %}">
+        <img src="{% static 'img/Logo-CMLN.png' %}" alt="CMLN" style="width: 120px; height: 80px; padding-left: 30px;" />
+    </a>
+    </div>
+
+
+    <!--#Profile-->
+    <div class="sidebar-logo  mr-0">
+        <ul class="navbar-nav ">
+                <li class="">
+                         <span class="" style="font-size:13px; ">Bienvenue, <strong>{{user.username}}</strong> </span>
+
+                    <a href="{% url 'user-profile' %}"><img style="width: 35px ;" class="img-thumbnail" src="{{user.profile.image.url}}" alt="profile img"> </a>
+
+                    </li>
+                <!--Enregistrement nouveaux utilisateurs-->
+                {% if user.is_authenticated and user.is_staff and user.is_superuser %}
+                <div class="mb-2"></div>
+                <li class="" style="width:100px;">
+                    <a class="nav-link text-white"style="font-size:10px; width: 100px; background:gray; " href="{% url 'user-register' %}"><i class="fas fa-user-plus " style="padding-left:5px ;"></i> <span
+                            class="" style="padding-left: 5px;">New user</span></a>
+                </li>
+                {% endif %}
+            </ul>
+    </div> <hr>
+    <!--#Profile-->
+{% if user.is_authenticated and user.is_staff or user.is_authenticated and user.is_superuser %}
+    <ul class="sidebar-navigation ">
+        <!-- Admin //Chargé // user -->
+
+
+        <!-- Admin //Chargé // user -->
+
+
+    <li class="header fs-6 " style="background-color: gray;">Accueil</li>
+        <li class="{% if selected == 'home' %}active{% endif %}">
+        <a href="{% url 'home' %}">
+            <i class="fa fa-home" aria-hidden="true"></i> Home
+        </a>
+        </li>
+
+        <li>
+        <a href="{% url 'dashboard' %}">
+            <i class="fa fa-tachometer-alt" aria-hidden="true"></i> Tableau de bord
+        </a>
+    </li>
+
+
+
+
+    <li class="header fs-6" style="background-color: gray;"">Gestion</li>
+        {% comment %} CATEGORY MENU {% endcomment %}
+
+  <!-- DEFINE ACTIVE MENU OR NOT-->
+        {% url 'membres' as membre_list %}
+        {% url 'create_membre' as create_membre %}
+        {% url 'detail_membre' membre.id as detail_membre %}
+        {% url 'update_membre' membre.id as update_membre %} <!-- For this we must include the sidebar "with id=form.instance.id " in base_template.html-->
+
+        <li class="dropdown {% if request.path == membre_list %} active {% endif %} {% if request.path == create_membre %} active {% endif %} {% if request.path == detail_membre %} active {% endif %} {% if request.path == update_membre  %} active {% endif %}">
+
+            <a href="{% url 'membres' %}" class="nav-link has-dropdown"><i class="fa fa-user" aria-hidden="true"></i><span>MEMBRES</span></a>
+          <ul class="dropdown-menu">
+            <!--active only if membre_list-->
+            <li class= "{% if request.path == 'membres' %} active {% endif %} {% if request.path == 'update_membre' %} active {% endif %}" ><a class="nav-link" href="{% url 'membres' %}"><i class="fas fa-list-alt mr-0 pr-0 ml-0"></i>Liste de membres</a></li>
+            <!--active only if create_membre-->
+            <li class="{% if request.path == 'create_membre' %} active {% endif %}"><a class="nav-link" href="{% url 'create_membre' %}"><i class="fas fa-plus mr-0 pr-0 ml-0"></i>Ajout / membre</a>
+          </ul>
+        </li>
+
+        <!-- DEFINE ACTIVE MENU OR NOT-->
+        {% url 'aerds' as aerd_list %}
+        {% url 'create_aerd' as create_aerd %}
+        {% url 'detail_aerd' aerd.id as detail_aerd %}
+        {% url 'update_aerd' aerd.id as update_aerd %} <!-- For this we must include the sidebar "with id=form.instance.id " in base_template.html-->
+
+        <li class="dropdown {% if request.path == aerd_list %} active {% endif %} {% if request.path == create_aerd %} active {% endif %} {% if request.path == detail_aerd %} active {% endif %} {% if request.path == update_aerd  %} active {% endif %}">
+
+            <a href="{% url 'aerds' %}" class="nav-link has-dropdown"><i class="fa fa-user" aria-hidden="true"></i><span>aerdS</span></a>
+          <ul class="dropdown-menu">
+            <!--active only if aerd_list-->
+            <li class= "{% if request.path == 'aerds' %} active {% endif %} {% if request.path == 'update_aerd' %} active {% endif %}" ><a class="nav-link" href="{% url 'aerds' %}"><i class="fas fa-list-alt mr-0 pr-0 ml-0"></i>Liste de aerds</a></li>
+            <!--active only if create_aerd-->
+            <li class="{% if request.path == 'create_aerd' %} active {% endif %}"><a class="nav-link" href="{% url 'create_aerd' %}"><i class="fas fa-plus mr-0 pr-0 ml-0"></i>Ajout / Aerd</a>
+          </ul>
+        </li>
+
+
+
+        <li class="">
+            <a href="#">
+                <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> Gestion Avancée
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class="fa fa-info-circle" aria-hidden="true"></i> Information
+            </a>
+        </li>
+
+    <li class="header fs-6 " style="background-color: gray;">Mon compte</li>
+
+        <li>
+            <a href="{% url 'user-logout' %}">
+                <i class="fas fa-power-off" aria-hidden="true"></i> Déconnexion
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'password_change' %}">
+                <i class="fas fa-key" aria-hidden="true"></i> Changer le mot de passe
+            </a>
+        </li>
+    </li>
+
+    </ul>
+    </div>
+
+<!-- END SIDEBAR MENU-->
+
+{% else %}
+
+    <!-- SIDEBAR MENU-->
+    <div class="sidebar-container" style="font-size:14px;">
+
+       
+
+        <ul class="sidebar-navigation">
+
+        <li class="header">Accueil</li>
+            <li class="{% if selected == 'home' %}active{% endif %}">
+            <a href="{% url 'home' %}">
+                <i class="fa fa-home" aria-hidden="true"></i> Home
+            </a>
+            </li>
+
+
+        <li class="header">Gestion</li>
+
+        {% comment %} CATEGORY MENU {% endcomment %}
+
+        <!-- DEFINE ACTIVE MENU OR NOT-->
+              {% url 'membres' as membre_list %}
+              {% url 'create_membre' as create_membre %}
+              {% url 'detail_membre' membre.id as detail_membre %}
+              {% url 'update_membre' membre.id as update_membre %} <!-- For this we must include the sidebar "with id=form.instance.id " in base_template.html-->
+      
+              <li class="dropdown {% if request.path == membre_list %} active {% endif %} {% if request.path == create_membre %} active {% endif %} {% if request.path == detail_membre %} active {% endif %} {% if request.path == update_membre  %} active {% endif %}">
+      
+                  <a href="{% url 'membres' %}" class="nav-link has-dropdown"><i class="fa fa-user" aria-hidden="true"></i><span>MEMBRES</span></a>
+                <ul class="dropdown-menu">
+                  <!--active only if membre_list-->
+                  <li class= "{% if request.path == 'membres' %} active {% endif %} {% if request.path == 'update_membre' %} active {% endif %}" ><a class="nav-link" href="{% url 'membres' %}"><i class="fas fa-list-alt mr-0 pr-0 ml-0"></i>Liste de membres</a></li>
+                  <!--active only if create_membre-->
+                  <li class="{% if request.path == 'create_membre' %} active {% endif %}"><a class="nav-link" href="{% url 'create_membre' %}"><i class="fas fa-plus mr-0 pr-0 ml-0"></i>Ajout / membre</a>
+                </ul>
+              </li>
+
+             <!-- DEFINE ACTIVE MENU OR NOT-->
+        {% url 'aerds' as aerd_list %}
+        {% url 'create_aerd' as create_aerd %}
+        {% url 'detail_aerd' aerd.id as detail_aerd %}
+        {% url 'update_aerd' aerd.id as update_aerd %} <!-- For this we must include the sidebar "with id=form.instance.id " in base_template.html-->
+
+        <li class="dropdown {% if request.path == aerd_list %} active {% endif %} {% if request.path == create_aerd %} active {% endif %} {% if request.path == detail_aerd %} active {% endif %} {% if request.path == update_aerd  %} active {% endif %}">
+
+            <a href="{% url 'aerds' %}" class="nav-link has-dropdown"><i class="fa fa-user" aria-hidden="true"></i><span>aerdS</span></a>
+          <ul class="dropdown-menu">
+            <!--active only if aerd_list-->
+            <li class= "{% if request.path == 'aerds' %} active {% endif %} {% if request.path == 'update_aerd' %} active {% endif %}" ><a class="nav-link" href="{% url 'aerds' %}"><i class="fas fa-list-alt mr-0 pr-0 ml-0"></i>Liste de aerds</a></li>
+            <!--active only if create_aerd-->
+            <li class="{% if request.path == 'create_aerd' %} active {% endif %}"><a class="nav-link" href="{% url 'create_aerd' %}"><i class="fas fa-plus mr-0 pr-0 ml-0"></i>Ajout / membre</a>
+          </ul>
+        </li>
+
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> Information
+                </a>
+            </li>
+
+        <li class="header">Mon compte</li>
+            <li>
+                <a href="{% url 'logout' %}">
+                    <i class="fas fa-power-off" aria-hidden="true"></i> Déconnexion
+                </a>
+            </li>
+
+            <li>
+               {% comment %} <a href="{% url 'password_change' %}">{% endcomment %}
+                    <i class="fas fa-key" aria-hidden="true"></i> Changer le mot de passe
+                </a>
+            </li>
+
+        </ul>
+
+
+        </div>
+    </aside>
+
+    {% endif %}
+<!-- END SIDEBAR MENU-->

@@ -1,104 +1,642 @@
 {% extends "partials/base.html" %}
+{% load static %}
+
 
 {% block content%}
-<div class="card">
-    <div class="card-header">
-        Coordonées
-        <a href="{% url 'update_membre' membre.id %}" class="close">
-            <i class="fas fa-pen"></i>
-        </a>
-    </div>
 
-    <div class="card-body">
+<!--============== SUPERUSER PANEL ==========-->
+{% if user.is_authenticated and user.is_superuser %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="container mt-3">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Détails <b>MEMBRE</b></h2></div>
+                    </div>
+                    <br>
+                    </div>
 
-        <div class="row">
-            <div class="col">
-                <strong>Nom</strong>: {{membre.nom}} <br>
-            </div>
-            
-            <div class="col">
-                <strong>Prenom</strong>: {{membre.prenom}} <br>
+                    <a href="{% url 'membres' %}" class="float-right mb-0 mt-3 mr-4 close" style="font-size: 12px; font-weight:normal;">
+                        <i class="fa fa-arrow-right" style="font-size: 12px; font-weight:normal;"></i> <i class="fa fa-list" style="font-size: 12px; font-weight:normal;" ></i> Liste des Membres
+                    </a>
+
+                    <div class="container-fluid ">
+                    
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            {% if membre.sexe == "M" %}
+                            <span class="badge badge-success">COORDONNEES</span>  | {{membre.prenom}} <strong>{{membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_homme.png' %}" alt="Avatar" class="avatar"> </strong>
+                            {% else %}
+                            <span class="badge badge-success">COORDONNEES</span>  | {{membre.prenom}} <strong>{{membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_dame.png' %}" alt="Avatar" class="avatar"></strong>
+                            {% endif %}
+                            
+                        </div>
+
+                    <div class="card-body" style="font-size:13px;">
+
+                        <div class="col-2 float-right">
+                            <div class="col">
+                                <img class="img-thumbnail fa-image " style="width: 140px;" src="{{membre.profile_image.url}}" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Nom</strong>: {{membre.nom}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Email</strong>: {{membre.email}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Prenom</strong>: {{membre.prenom}} <br>
+                                    
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Mobile</strong>: {{membre.telephone_1}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Etat civil</strong>: {{membre.etat_civil}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Phone 2</strong>: {{membre.telephone_2}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Extension</strong>: {{membre.extension}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Adresse</strong>: {{membre.get_adresse_complete_str}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Date d'arrivéé à CMLN</strong>: {{membre.date_arrivee}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Pays</strong>: {{membre.extension.pays}} <br>
+                                </div>
+
+                                
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Baptisé.e ?</strong>: {{membre.baptise}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Observations</strong>: {{membre.commentaire}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Date de baptème</strong>: {{membre.date_bapteme}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Situation actuelle</strong>: {{membre.situation}} <br>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="card-footer">
+
+                        <a class="btn-outline-danger btn-sm  float-right"
+                                    href="#"><i class="fa fa-trash pr-2 pl-2 " style="font-size: 14px;" data-toggle="modal" data-target="#deleteModal"> Supprimer</i>
+                        </a>
+
+                        <a class="btn-outline-info btn-sm float-right pr-2 pl-2 mr-2"
+                            href="{% url 'update_membre' membre.id %}"> <i class="fa fa-pencil pr-2 pl-2" style="font-size: 14px;"  data-toggle="modal" data-target=""> Modifier</i>
+                        </a>
+                    </div>
+
+                </div>
+
+                
+                    <!-- #1.DELETE  -->                                			                                     
+                                    <!-- Button trigger modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel"><i class="fa fa-trash"></i>&nbsp;&nbsp;Suppression</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            
+                                            </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                    <span class="text-danger"><i class="fa fa-trash fa-3x mt-2"></i></span>
+                                                    <div style="height:50px;" class="mt-2"><b>Etes-vous sûr de vouloir supprimer  ?</b></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Annuler</button>
+                                            <a  href="{% url 'delete_membre' membre.id %}" type="button" class="btn btn-outline-danger btn-sm">Confirmer</a>
+                                            
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- #ENDDELETE  --> 
+
+                    </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col">
-                <strong>Email</strong>: {{membre.email}} <br>
-            </div>
-            
-            <div class="col">
-                <strong>Téléphone</strong>: {{membre.telephone}} <br>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <strong>Adresse</strong>: {{membre.get_adresse_complete_str}} <br>
-            </div>
-
-            <div class="col">
-                <strong>Pays</strong>: {{membre.extension.pays}} <br>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <strong>Commentaire</strong>: {{membre.commentaire}} <br>
-            </div>
-        </div>
-
-
     </div>
 </div>
 
+<!--============== STAFF PANEL ==========-->
+{% elif user.is_authenticated and user.is_staff %}  
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="container mt-3">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Détails <b>MEMBRE</b></h2></div>
+                    </div>
+                    <br>
+                    </div>
+                    <a href="{% url 'membres' %}" class="float-right mb-0 mt-3 mr-4 close" style="font-size: 12px; font-weight:normal;">
+                        <i class="fa fa-arrow-right" style="font-size: 12px; font-weight:normal;"></i> <i class="fa fa-list" style="font-size: 12px; font-weight:normal;" ></i> Liste des Membres
+                    </a>
+                    <div class="container-fluid ">
+                    
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            {% if membre.sexe == "M" %}
+                            <span class="badge badge-success">COORDONNEES</span>  | {{membre.prenom}} <strong>{{membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_homme.png' %}" alt="Avatar" class="avatar"> </strong>
+                            {% else %}
+                            <span class="badge badge-success">COORDONNEES</span>  | {{membre.prenom}} <strong>{{membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_dame.png' %}" alt="Avatar" class="avatar"></strong>
+                            {% endif %}
+                            
+                        </div>
 
-<div class="card">
-    <div class="card-header">
-        Afiliation
-        <a href="{% url 'update_membre' membre.id %}" class="close">
-            <i class="fas fa-pen"></i>
-        </a>
-    </div>
+                <div class="card-body" style="font-size:13px;">
 
-    <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <strong>Nom</strong>: {{membre.nom}} <br>
+                        </div>
+                        
+                        <div class="col">
+                            <strong>Email</strong>: {{membre.email}} <br>
+                        </div>
+                    </div>
 
-        <div class="row">
-            <div class="col">
-                <strong>Nom</strong>: {{membre.nom}} <br>
-            </div>
-            
-            <div class="col">
-                <strong>Prenom</strong>: {{membre.prenom}} <br>
+                    <div class="row">
+                        <div class="col">
+                            <strong>Prenom</strong>: {{membre.prenom}} <br>
+                            
+                        </div>
+                        
+                        <div class="col">
+                            <strong>Téléphone</strong>: {{membre.telephone}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Adresse</strong>: {{membre.get_adresse_complete_str}} <br>
+                        </div>
+
+                        <div class="col">
+                            <strong>Pays</strong>: {{membre.extension.pays}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Commentaire</strong>: {{membre.commentaire}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Nom</strong>: {{membre.nom}} <br>
+                        </div>
+                        
+                        <div class="col">
+                            <strong>Prenom</strong>: {{membre.prenom}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Email</strong>: {{membre.email}} <br>
+                        </div>
+                        
+                        <div class="col">
+                            <strong>Téléphone</strong>: {{membre.telephone}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Adresse</strong>: {{membre.get_adresse_complete_str}} <br>
+                        </div>
+
+                        <div class="col">
+                            <strong>Pays</strong>: {{membre.extension.pays}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Commentaire</strong>: {{membre.commentaire}} <br>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="card-footer">
+
+                    <a class="btn-outline-danger btn-sm  float-right"
+                                href="#"><i class="fa fa-trash pr-2 pl-2 " style="font-size: 14px;" data-toggle="modal" data-target="#deleteModal"> Supprimer</i>
+                    </a>
+
+                    <a class="btn-outline-info btn-sm float-right pr-2 pl-2 mr-2"
+                        href="{% url 'update_membre' membre.id %}"> <i class="fa fa-pencil pr-2 pl-2" style="font-size: 14px;"  data-toggle="modal" data-target=""> Modifier</i>
+                    </a>
+                </div>
+
+                </div>
+
+                
+                    <!-- #1.DELETE  -->                                			                                     
+                                    <!-- Button trigger modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel"><i class="fa fa-trash"></i>&nbsp;&nbsp;Suppression</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            
+                                            </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                    <span class="text-danger"><i class="fa fa-trash fa-3x mt-2"></i></span>
+                                                    <div style="height:50px;" class="mt-2"><b>Etes-vous sûr de vouloir supprimer  ?</b></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Annuler</button>
+                                            <a  href="{% url 'delete_membre' membre.id %}" type="button" class="btn btn-outline-danger btn-sm">Confirmer</a>
+                                            
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- #ENDDELETE  --> 
+
+                    </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col">
-                <strong>Email</strong>: {{membre.email}} <br>
-            </div>
-            
-            <div class="col">
-                <strong>Téléphone</strong>: {{membre.telephone}} <br>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <strong>Adresse</strong>: {{membre.get_adresse_complete_str}} <br>
-            </div>
-
-            <div class="col">
-                <strong>Pays</strong>: {{membre.extension.pays}} <br>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <strong>Commentaire</strong>: {{membre.commentaire}} <br>
-            </div>
-        </div>
-
-
     </div>
 </div>
-{% endblock%}
+
+<!--============== ADMIN PANEL ==========-->
+{% elif user.is_authenticated and user.is_admin %}  
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="container mt-3">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Détails <b>MEMBRE</b></h2></div>
+                    </div>
+                    <br>
+                    </div>
+                    <a href="{% url 'membres' %}" class="float-right mb-0 mt-3 mr-4 close" style="font-size: 12px; font-weight:normal;">
+                        <i class="fa fa-arrow-right" style="font-size: 12px; font-weight:normal;"></i> <i class="fa fa-list" style="font-size: 12px; font-weight:normal;" ></i> Liste des Membres
+                    </a>
+                    <div class="container-fluid ">
+                    
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            {% if membre.sexe == "M" %}
+                            <span class="badge badge-success">COORDONNEES</span>  | {{membre.prenom}} <strong>{{membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_homme.png' %}" alt="Avatar" class="avatar"> </strong>
+                            {% else %}
+                            <span class="badge badge-success">COORDONNEES</span>  | {{membre.prenom}} <strong>{{membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_dame.png' %}" alt="Avatar" class="avatar"></strong>
+                            {% endif %}
+                            
+                        </div>
+                <div class="card-body" style="font-size:13px;">
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Nom</strong>: {{membre.nom}} <br>
+                        </div>
+                        
+                        <div class="col">
+                            <strong>Email</strong>: {{membre.email}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Prenom</strong>: {{membre.prenom}} <br>
+                            
+                        </div>
+                        
+                        <div class="col">
+                            <strong>Téléphone</strong>: {{membre.telephone}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Adresse</strong>: {{membre.get_adresse_complete_str}} <br>
+                        </div>
+
+                        <div class="col">
+                            <strong>Pays</strong>: {{membre.extension.pays}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Commentaire</strong>: {{membre.commentaire}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Nom</strong>: {{membre.nom}} <br>
+                        </div>
+                        
+                        <div class="col">
+                            <strong>Prenom</strong>: {{membre.prenom}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Email</strong>: {{membre.email}} <br>
+                        </div>
+                        
+                        <div class="col">
+                            <strong>Téléphone</strong>: {{membre.telephone}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Adresse</strong>: {{membre.get_adresse_complete_str}} <br>
+                        </div>
+
+                        <div class="col">
+                            <strong>Pays</strong>: {{membre.extension.pays}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <strong>Commentaire</strong>: {{membre.commentaire}} <br>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="card-footer">
+                    <a class="btn-outline-info btn-sm float-right pr-2 pl-2 mr-2"
+                        href="{% url 'update_membre' membre.id %}"> <i class="fa fa-pencil pr-2 pl-2" style="font-size: 14px;"  data-toggle="modal" data-target=""> Modifier</i>
+                    </a>
+                </div>
+
+                </div>
+
+                
+                    <!-- #1.DELETE  -->                                			                                     
+                                    <!-- Button trigger modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel"><i class="fa fa-trash"></i>&nbsp;&nbsp;Suppression</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            
+                                            </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                    <span class="text-danger"><i class="fa fa-trash fa-3x mt-2"></i></span>
+                                                    <div style="height:50px;" class="mt-2"><b>Etes-vous sûr de vouloir supprimer  ?</b></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Annuler</button>
+                                            <a  href="{% url 'delete_membre' membre.id %}" type="button" class="btn btn-outline-danger btn-sm">Confirmer</a>
+                                            
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- #ENDDELETE  --> 
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--============== USER PANEL ==========-->
+{% else %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="container mt-3">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Détails <b>MEMBRE</b></h2></div>
+                    </div>
+                    <br>
+                    </div>
+                    <a href="{% url 'membres' %}" class="float-right mb-0 mt-3 mr-4 close" style="font-size: 12px; font-weight:normal;">
+                        <i class="fa fa-arrow-right" style="font-size: 12px; font-weight:normal;"></i> <i class="fa fa-list" style="font-size: 12px; font-weight:normal;" ></i> Liste des Membres
+                    </a>
+                    <div class="container-fluid ">
+                    
+                    <div class="card mt-5">
+
+                        <div class="card-header">
+                            {% if membre.sexe == "M" %}
+                            <span class="badge badge-success">COORDONNEES</span>  | {{membre.prenom}} <strong>{{membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_homme.png' %}" alt="Avatar" class="avatar"> </strong>
+                            {% else %}
+                            <span class="badge badge-success">COORDONNEES</span>  | {{membre.prenom}} <strong>{{membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_dame.png' %}" alt="Avatar" class="avatar"></strong>
+                            {% endif %}
+                            
+                        </div>
+
+                        <div class="card-body" style="font-size:13px;">
+
+                            <div class="col-2 float-right">
+                                <div class="col">
+                                    <img class="img-thumbnail fa-image " style="width: 140px;" src="{{membre.profile_image.url}}" alt="">
+                                </div>
+                            </div>
+
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Nom</strong>: {{membre.nom}} <br>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <strong>Email</strong>: {{membre.email}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Prenom</strong>: {{membre.prenom}} <br>
+                                        
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <strong>Téléphone</strong>: {{membre.telephone}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Etat civil</strong>: {{membre.etat_civil}} <br>
+                                    </div>
+
+                                    <div class="col">
+                                        <strong>Adresse</strong>: {{membre.get_adresse_complete_str}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Extension</strong>: {{membre.extension}} <br>
+                                    </div>
+
+                                    <div class="col">
+                                        <strong>Pays</strong>: {{membre.extension.pays}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Date d'arrivéé à CMLN</strong>: {{membre.date_arrivee}} <br>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <strong>Observations</strong>: {{membre.commentaire}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Baptisé.e ?</strong>: {{membre.baptise}} <br>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Date de baptème</strong>: {{membre.date_bapteme}} <br>
+                                    </div>
+
+                                    <div class="col">
+                                        <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Situation actuelle</strong>: {{membre.situation}} <br>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer">
+
+                            <a class="btn-outline-info btn-sm float-right pr-2 pl-2 mr-2"
+                                href="{% url 'update_membre' membre.id %}"> <i class="fa fa-pencil pr-2 pl-2" style="font-size: 14px;"  data-toggle="modal" data-target=""> Modifier</i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <!-- #1.DELETE  -->                                			                                     
+                                    <!-- Button trigger modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel"><i class="fa fa-trash"></i>&nbsp;&nbsp;Suppression</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            
+                                            </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                    <span class="text-danger"><i class="fa fa-trash fa-3x mt-2"></i></span>
+                                                    <div style="height:50px;" class="mt-2"><b>Etes-vous sûr de vouloir supprimer  ?</b></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Annuler</button>
+                                            <a  href="{% url 'delete_membre' membre.id %}" type="button" class="btn btn-outline-danger btn-sm">Confirmer</a>
+                                            
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- #ENDDELETE  --> 
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

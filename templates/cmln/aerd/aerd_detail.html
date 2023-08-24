@@ -1,99 +1,172 @@
+
 {% extends "partials/base.html" %}
+{% load static %}
 
 {% block content%}
-<div class="card">
-    <div class="card-header">
-        Coordonées
-        <a href="{% url 'update_aerd' aerd.id %}" class="close">
-            <i class="fas fa-pen"></i>
-        </a>
-    </div>
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="container mt-3">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Détails <b>AERD</b></h2></div>
+                    </div>
+                    <br>
+                </div>
+                <a href="{% url 'aerds' %}" class="float-right mb-0 mt-3 mr-4 close" style="font-size: 12px; font-weight:normal;">
+                    <i class="fa fa-arrow-right" style="font-size: 12px; font-weight:normal;"></i> <i class="fa fa-list-alt" style="font-size: 12px; font-weight:normal;" ></i> Liste des AERD
+                </a>
+                <div class="container-fluid ">
+                    
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            {% if aerd.membre.sexe == "M" %}
+                           <span class="badge badge-success">COORDONNEES</span>  |  {{aerd.membre.prenom}} <strong>{{aerd.membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_homme.png' %}" alt="Avatar" class="avatar"> </strong>
+                            {% else %}
+                            <span class="badge badge-success">COORDONNEES </span> | {{aerd.membre.prenom}} <strong>{{aerd.membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_dame.png' %}" alt="Avatar" class="avatar"></strong>
+                            {% endif %}
+                            <i class="fa fa-user close"></i>
+                            
 
-    <div class="card-body">
+                        </div>
 
-        <div class="row">
-            <div class="col">
-                <strong>Nom</strong>: {{aerd.membre.nom}} <br>
-            </div>
-            
-            <div class="col">
-                <strong>Prenom</strong>: {{aerd.membre.prenom}} <br>
+                        <!-- =============== COORDONNEES AERD ===============-->
+                        <div class="card-body" style="font-size:15px;">
+
+                            <div class="col-2 float-right">
+                                <div class="col">
+                                    <img class="img-thumbnail fa-image " style="width: 140px;" src="{{aerd.membre.profile_image.url}}" alt="">
+                                </div>
+                            </div>
+
+                            <div class="col-9">
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Nom</strong>: {{aerd.membre.nom}} <br>
+                                        
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <strong>Adresse</strong>: {{aerd.membre.get_adresse_complete_str}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Prenom</strong>: {{aerd.membre.prenom}} <br>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <strong>Téléphone</strong>: {{aerd.membre.telephone}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Position actuelle</strong>: {{aerd.position}} <br>
+                                    </div>
+
+                                    <div class="col">
+                                        <strong>Email</strong>: {{aerd.membre.email}} <br>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- =============== AFILIATION AERD ===============-->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="badge badge-danger">AFILIATION</span>
+                        <i class="fas fa-network-wired close"></i>
+                            
+                        </div>
+
+                        <div class="card-body " style="font-size:14px;">
+                        
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Extension</strong>: {{aerd.extension}} <br>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <strong>Rôle</strong>: {{aerd.responsabilite}} <br>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Departement(s)</strong>: {% for departement in aerd.departement.all %}{{departement.designation}}{% empty %} N/A {% endfor %}<br>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <strong>Pays</strong>: {{aerd.membre.extension.pays}} <br>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Date d'arrivée à CMLN</strong>: {{aerd.membre.date_arrivee}} <br>
+                                    </div>
+
+                                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <strong>Commentaire</strong>: {{aerd.commentaire}} <br>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="card-footer">
+
+                            <a class="btn-outline-danger btn-sm  float-right"
+                                        href="#"><i class="fa fa-trash pr-2 pl-2 " style="font-size: 14px;" data-toggle="modal" data-target="#deleteModal"> Supprimer</i>
+                            </a>
+
+                            <a class="btn-outline-info btn-sm float-right pr-2 pl-2 mr-2"
+                                href="{% url 'update_aerd' aerd.id %}"> <i class="fa fa-pencil pr-2 pl-2" style="font-size: 14px;"  data-toggle="modal" data-target=""> Modifier</i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- #1.DELETE  -->                                			                                     
+                                    <!-- Button trigger modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp;Suppression</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            
+                                            </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                    <span class="text-danger"><i class="fa fa-trash fa-3x mt-2"></i></span>
+                                                    <div style="height:50px;" class="mt-2"><b>Etes-vous sûr de vouloir supprimer  ?</b></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Annuler</button>
+                                            <a  href="{% url 'delete_aerd' aerd.id %}" type="button" class="btn btn-outline-danger btn-sm">Confirmer</a>
+                                            
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- #ENDDELETE  --> 
+                </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col">
-                <strong>Position actuelle</strong>: {{aerd.position}} <br>
-            </div>
-            
-            <div class="col">
-                <strong>Téléphone</strong>: {{aerd.membre.telephone}} <br>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <strong>Adresse</strong>: {{aerd.membre.get_adresse_complete_str}} <br>
-            </div>
-
-            <div class="col">
-                <strong>Email</strong>: {{aerd.membre.email}} <br>
-            </div>
-        </div>
-
-
-
     </div>
 </div>
 
-
-<div class="card">
-    <div class="card-header">
-        Afiliation
-        <a href="{% url 'update_aerd' aerd.id %}" class="close">
-            <i class="fas fa-pen"></i>
-        </a>
-    </div>
-
-    <div class="card-body">
-
-        <div class="row">
-            <div class="col">
-                <strong>Extension</strong>: {{aerd.extension}} <br>
-            </div>
-            
-            <div class="col">
-                <strong>Ministère</strong>: {{aerd.ministere}} <br>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <strong>Departement</strong>: {{aerd.departement}} <br>
-            </div>
-            
-            <div class="col">
-                <strong>Rôle</strong>: {{aerd.membre.responsabilite}} <br>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <strong>Date d'arrivée à CMLN</strong>: {{aerd.membre.date_arrivee}} <br>
-            </div>
-
-            <div class="col">
-                <strong>Pays</strong>: {{aerd.membre.extension.pays}} <br>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <strong>Commentaire</strong>: {{aerd.commentaire}} <br>
-            </div>
-        </div>
-
-
-    </div>
-</div>
 {% endblock%}

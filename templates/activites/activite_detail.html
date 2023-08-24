@@ -1,0 +1,819 @@
+
+{% extends "partials/base.html" %}
+{% load static %}
+
+{% block content%}
+
+<!--============== SUPERUSER ==============-->
+{% if user.is_authenticated and user.is_superuser %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="container mt-3">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Détails <b>ACTIVITE</b> du <span style="font-size: 26px;">{{activite.date}}</span>  </h2></div>
+                    </div>
+                    <br>
+                </div>
+                <a href="{% url 'activites' %}" class="float-right mb-0 mt-3 mr-4">Retour vers liste des activités</a>
+                <div class="container-fluid ">
+                    
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            {% comment %}
+                            {% if aerd.membre.sexe == "M" %}
+                            COORDONNEES -- {{aerd.membre.prenom}} <strong>{{aerd.membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_homme.png' %}" alt="Avatar" class="avatar"> </strong>
+                            {% else %}
+                            COORDONNEES -- {{aerd.membre.prenom}} <strong>{{aerd.membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_dame.png' %}" alt="Avatar" class="avatar"></strong>
+                            {% endif %}
+                            {% endcomment %}
+                            <i class="fa fa-user close"></i>
+                            
+
+                        </div>
+
+                        <div class="card-body" style="font-size:15px;">
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Extension</strong>: {{activite.extension}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Type</strong>: {{activite.type}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Date</strong>: {{activite.date}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Heure de début</strong>: {{activite.heure_debut}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Heure de fin</strong>: {{activite.heure_fin}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Thème</strong>: {{activite.theme}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Réf. Biblique</strong>: {{activite.ref_biblique}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Modérateur / Conducteur</strong>: {{activite.moderateur}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Orateur / Intervenant</strong>: {{activite.intervenant}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Résumé</strong>: {{activite.resume}} <br>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-header text-secondary text-uppercase" style="font-size:16px; font-weight: bold;">
+                            Statistiques
+                        <i class="fa fa-count close"></i>  |  <span class="badge badge-info p-2"> Total participants : {{activite.total_participants}}</span> --- <span class="badge badge-warning p-2"> Total Dons : {{activite.total_offrandes}} Fcfa </span>
+                            
+                        </div>
+
+                        <div class="card-body " style="font-size:15px;">
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Participants hommes</strong>: {{activite.nbre_hommes}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Participants femmes</strong>: {{activite.nbre_femmes}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Participants enfants</strong>: {{activite.nbre_enfants}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Dont "nouveaux venus"</strong>: {{activite.nouveaux_venus}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Offrande</strong>: {{activite.offrande}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Dîme</strong>: {{activite.dime}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Premices</strong>: {{activite.premices}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Action de grâce</strong>: {{activite.action_grace}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Achat parcelle</strong>: {{activite.achat_parcelle}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Construction</strong>: {{activite.construction}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Autres</strong>: {{activite.autres}} <br>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="card-footer">
+
+                            <a class="btn-outline-danger btn-sm  float-right"
+                                        href="#"><i class="fa fa-trash pr-2 pl-2 " style="font-size: 14px;" data-toggle="modal" data-target="#deleteModal"> Supprimer</i>
+                            </a>
+
+                            <a class="btn-outline-info btn-sm float-right pr-2 pl-2 mr-2"
+                                href="{% url 'update_activite' activite.id %}"> <i class="fa fa-pencil pr-2 pl-2" style="font-size: 14px;"  data-toggle="modal" data-target=""> Modifier</i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- #1.DELETE  -->                                			                                     
+                                    <!-- Button trigger modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp;Suppression</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            
+                                            </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                    <span class="text-danger"><i class="fa fa-trash fa-3x mt-2"></i></span>
+                                                    <div style="height:50px;" class="mt-2"><b>Etes-vous sûr de vouloir supprimer  ?</b></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Annuler</button>
+                                            <a  href="{% url 'delete_activite' activite.id %}" type="button" class="btn btn-outline-danger btn-sm">Confirmer</a>
+                                            
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- #ENDDELETE  --> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--============== STAFF ============-->
+{% elif user.is_authenticated and user.is_staff %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="container mt-3">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Détails <b>ACTIVITE</b> du <span style="font-size: 26px;">{{activite.date}}</span>  </h2></div>
+                    </div>
+                    <br>
+                </div>
+                <a href="{% url 'activites' %}" class="float-right mb-0 mt-3 mr-4">Retour vers liste des activités</a>
+                <div class="container-fluid ">
+                    
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            {% comment %}
+                            {% if aerd.membre.sexe == "M" %}
+                            COORDONNEES -- {{aerd.membre.prenom}} <strong>{{aerd.membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_homme.png' %}" alt="Avatar" class="avatar"> </strong>
+                            {% else %}
+                            COORDONNEES -- {{aerd.membre.prenom}} <strong>{{aerd.membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_dame.png' %}" alt="Avatar" class="avatar"></strong>
+                            {% endif %}
+                            {% endcomment %}
+                            <i class="fa fa-user close"></i>
+                            
+
+                        </div>
+
+                        <div class="card-body" style="font-size:15px;">
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Extension</strong>: {{activite.extension}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Type</strong>: {{activite.type}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Date</strong>: {{activite.date}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Heure de début</strong>: {{activite.heure_debut}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Heure de fin</strong>: {{activite.heure_fin}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Thème</strong>: {{activite.theme}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Réf. Biblique</strong>: {{activite.ref_biblique}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Modérateur / Conducteur</strong>: {{activite.moderateur}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Orateur / Intervenant</strong>: {{activite.intervenant}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Résumé</strong>: {{activite.resume}} <br>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-header text-secondary text-uppercase" style="font-size:16px; font-weight: bold;">
+                            Statistiques
+                        <i class="fa fa-count close"></i>  |  <span class="badge badge-info p-2"> Total participants : {{activite.total_participants}}</span> --- <span class="badge badge-warning p-2"> Total Dons : {{activite.total_offrandes}} Fcfa </span>
+                            
+                        </div>
+
+                        <div class="card-body " style="font-size:15px;">
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Participants hommes</strong>: {{activite.nbre_hommes}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Participants femmes</strong>: {{activite.nbre_femmes}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Participants enfants</strong>: {{activite.nbre_enfants}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Dont "nouveaux venus"</strong>: {{activite.nouveaux_venus}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Offrande</strong>: {{activite.offrande}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Dîme</strong>: {{activite.dime}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Premices</strong>: {{activite.premices}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Action de grâce</strong>: {{activite.action_grace}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Achat parcelle</strong>: {{activite.achat_parcelle}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Construction</strong>: {{activite.construction}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Autres</strong>: {{activite.autres}} <br>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="card-footer">
+
+                            <a class="btn-outline-danger btn-sm  float-right"
+                                        href="#"><i class="fa fa-trash pr-2 pl-2 " style="font-size: 14px;" data-toggle="modal" data-target="#deleteModal"> Supprimer</i>
+                            </a>
+
+                            <a class="btn-outline-info btn-sm float-right pr-2 pl-2 mr-2"
+                                href="{% url 'update_activite' activite.id %}"> <i class="fa fa-pencil pr-2 pl-2" style="font-size: 14px;"  data-toggle="modal" data-target=""> Modifier</i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- #1.DELETE  -->                                			                                     
+                                    <!-- Button trigger modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp;Suppression</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            
+                                            </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                    <span class="text-danger"><i class="fa fa-trash fa-3x mt-2"></i></span>
+                                                    <div style="height:50px;" class="mt-2"><b>Etes-vous sûr de vouloir supprimer  ?</b></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Annuler</button>
+                                            <a  href="{% url 'delete_activite' activite.id %}" type="button" class="btn btn-outline-danger btn-sm">Confirmer</a>
+                                            
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- #ENDDELETE  --> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--============== ADMIN ===========-->
+{% elif user.is_authenticated and user.is_admin %} 
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="container mt-3">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Détails <b>ACTIVITE</b> du <span style="font-size: 26px;">{{activite.date}}</span>  </h2></div>
+                    </div>
+                    <br>
+                </div>
+                <a href="{% url 'activites' %}" class="float-right mb-0 mt-3 mr-4">Retour vers liste des activités</a>
+                <div class="container-fluid ">
+                    
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            {% comment %}
+                            {% if aerd.membre.sexe == "M" %}
+                            COORDONNEES -- {{aerd.membre.prenom}} <strong>{{aerd.membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_homme.png' %}" alt="Avatar" class="avatar"> </strong>
+                            {% else %}
+                            COORDONNEES -- {{aerd.membre.prenom}} <strong>{{aerd.membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_dame.png' %}" alt="Avatar" class="avatar"></strong>
+                            {% endif %}
+                            {% endcomment %}
+                            <i class="fa fa-user close"></i>
+                            
+
+                        </div>
+
+                        <div class="card-body" style="font-size:15px;">
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Extension</strong>: {{activite.extension}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Type</strong>: {{activite.type}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Date</strong>: {{activite.date}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Heure de début</strong>: {{activite.heure_debut}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Heure de fin</strong>: {{activite.heure_fin}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Thème</strong>: {{activite.theme}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Réf. Biblique</strong>: {{activite.ref_biblique}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Modérateur / Conducteur</strong>: {{activite.moderateur}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Orateur / Intervenant</strong>: {{activite.intervenant}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Résumé</strong>: {{activite.resume}} <br>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-header text-secondary text-uppercase" style="font-size:16px; font-weight: bold;">
+                            Statistiques
+                        <i class="fa fa-count close"></i>  |  <span class="badge badge-info p-2"> Total participants : {{activite.total_participants}}</span> --- <span class="badge badge-warning p-2"> Total Dons : {{activite.total_offrandes}} Fcfa </span>
+                            
+                        </div>
+
+                        <div class="card-body " style="font-size:15px;">
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Participants hommes</strong>: {{activite.nbre_hommes}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Participants femmes</strong>: {{activite.nbre_femmes}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Participants enfants</strong>: {{activite.nbre_enfants}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Dont "nouveaux venus"</strong>: {{activite.nouveaux_venus}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Offrande</strong>: {{activite.offrande}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Dîme</strong>: {{activite.dime}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Premices</strong>: {{activite.premices}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Action de grâce</strong>: {{activite.action_grace}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Achat parcelle</strong>: {{activite.achat_parcelle}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Construction</strong>: {{activite.construction}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Autres</strong>: {{activite.autres}} <br>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="card-footer">
+
+
+                            <a class="btn-outline-info btn-sm float-right pr-2 pl-2 mr-2"
+                                href="{% url 'update_activite' activite.id %}"> <i class="fa fa-pencil pr-2 pl-2" style="font-size: 14px;"  data-toggle="modal" data-target=""> Modifier</i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- #1.DELETE  -->                                			                                     
+                                    <!-- Button trigger modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp;Suppression</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            
+                                            </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                    <span class="text-danger"><i class="fa fa-trash fa-3x mt-2"></i></span>
+                                                    <div style="height:50px;" class="mt-2"><b>Etes-vous sûr de vouloir supprimer  ?</b></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Annuler</button>
+                                            <a  href="{% url 'delete_activite' activite.id %}" type="button" class="btn btn-outline-danger btn-sm">Confirmer</a>
+                                            
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- #ENDDELETE  --> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--============== USER WITHOUT EXTENSION =========== "DONE"-->
+{% elif user.is_authenticated and not user.extension.id %}
+<div class="content-wrapper">
+    
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="container-fluid">
+            <p class="text-danger"><i class="fa fa-warning fa-2x"></i> Veuillez contacter <a href="mailto:popaulnzongo@gmail.com">l'administrateur</a> afin de passer votre demande d'affiliation à une extension pour avoir accès aux contenus.</p> 
+        </div><!-- /.container-fluid -->
+        
+    </section>
+    <!-- /.content -->
+</div>
+
+<!--============== USER ===========-->
+{% else %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="container mt-3">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Détails <b>ACTIVITE</b> du <span style="font-size: 26px;">{{activite.date}}</span>  </h2></div>
+                    </div>
+                    <br>
+                </div>
+                <a href="{% url 'activites' %}" class="float-right mb-0 mt-3 mr-4">Retour vers liste des activités</a>
+                <div class="container-fluid ">
+                    
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            {% comment %}
+                            {% if aerd.membre.sexe == "M" %}
+                            COORDONNEES -- {{aerd.membre.prenom}} <strong>{{aerd.membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_homme.png' %}" alt="Avatar" class="avatar"> </strong>
+                            {% else %}
+                            COORDONNEES -- {{aerd.membre.prenom}} <strong>{{aerd.membre.nom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_dame.png' %}" alt="Avatar" class="avatar"></strong>
+                            {% endif %}
+                            {% endcomment %}
+                            <i class="fa fa-user close"></i>
+                            
+
+                        </div>
+
+                        <div class="card-body" style="font-size:15px;">
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Extension</strong>: {{activite.extension}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Type</strong>: {{activite.type}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Date</strong>: {{activite.date}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Heure de début</strong>: {{activite.heure_debut}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Heure de fin</strong>: {{activite.heure_fin}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Thème</strong>: {{activite.theme}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Réf. Biblique</strong>: {{activite.ref_biblique}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Modérateur / Conducteur</strong>: {{activite.moderateur}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Orateur / Intervenant</strong>: {{activite.intervenant}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Résumé</strong>: {{activite.resume}} <br>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-header text-secondary text-uppercase" style="font-size:16px; font-weight: bold;">
+                            Statistiques
+                        <i class="fa fa-count close"></i>  |  <span class="badge badge-info p-2"> Total participants : {{activite.total_participants}}</span> --- <span class="badge badge-warning p-2"> Total Dons : {{activite.total_offrandes}} Fcfa </span>
+                            
+                        </div>
+
+                        <div class="card-body " style="font-size:15px;">
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Participants hommes</strong>: {{activite.nbre_hommes}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Participants femmes</strong>: {{activite.nbre_femmes}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Participants enfants</strong>: {{activite.nbre_enfants}} <br>
+                                </div>
+                                
+                                <div class="col">
+                                    <strong>Dont "nouveaux venus"</strong>: {{activite.nouveaux_venus}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Offrande</strong>: {{activite.offrande}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Dîme</strong>: {{activite.dime}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Premices</strong>: {{activite.premices}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Action de grâce</strong>: {{activite.action_grace}} <br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Achat parcelle</strong>: {{activite.achat_parcelle}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Construction</strong>: {{activite.construction}} <br>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Autres</strong>: {{activite.autres}} <br>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <!-- #1.DELETE  -->                                			                                     
+                                    <!-- Button trigger modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp;Suppression</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            
+                                            </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                    <span class="text-danger"><i class="fa fa-trash fa-3x mt-2"></i></span>
+                                                    <div style="height:50px;" class="mt-2"><b>Etes-vous sûr de vouloir supprimer  ?</b></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Annuler</button>
+                                            <a  href="{% url 'delete_activite' activite.id %}" type="button" class="btn btn-outline-danger btn-sm">Confirmer</a>
+                                            
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- #ENDDELETE  --> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock%}

@@ -2,16 +2,132 @@
 
 {% block content  %}
 
-{% include 'partials/nav.html' %}
 
-<div class="container">
-    <div class="row">
+
+<!--============== SUPERUSER PANEL==============-->
+{% if user.is_authenticated and user.is_superuser %}
+
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="container-fluid">
+            
+            <div class="table-responsive mt-5">
+                <div class="table-wrapper mb-5">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Liste des <b>AERD</b></h2></div>
+                            <div class="col-sm-4"> <br>
+                                
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+            
+                    <!-- Search zone -->
+            <!--div class="row p-4">
+                <div class="col-sm-6 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Recherche
+                        </div>
+                        <form action="{% url 'membres' %}" method="post">
+                            <div class="card-body">
+                                {% csrf_token%}
+                                {{form.as_p}}
+                                <div class="text-right">
+                                    <button class="btn btn-info" type="submit"><i class="fa fa-search" aria-hidden="true">Rechercher</i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </!--div-->
+            
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" name="q" type="search" placeholder="Recherche par Nom | Prénom | Ville" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> <br>
+            <!-- End Search zone -->
+            
+                    <table class="table table-striped table-hover table-bordered bg-white" style="font-size:12px;">
+                        <thead >
+                            <tr>
+                                <th>#ID</th>
+                                <th>Noms et prenom</th>
+                                <th>Fonction</th>
+                                <th>Situation</th>
+                                <th>Departements</th>
+                                <th>Extension</th>
+                                <th>Ville</th>
+                                <th>Détails</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mytable">
+                            {% for aerd in aerd_list %}
+                            <tr>
+                                <td><a href="{% url 'update_aerd' aerd.id %}">{{aerd.id}}</a></td>
+                                <td>{{aerd.membre.nom}} {{aerd.membre.prenom}}</td>
+                                <td>{{aerd.position}}</td>
+                                <!--td>{{aerd.formateur|default:""}}</!--td-->
+                                <td>{{aerd.situation}}</td>
+                                <td> {% for departement in aerd.departement.all %}{{departement.designation}}{% empty %} N/A {% endfor %}</td>
+                                <td>{{aerd.extension.nom}}</td>
+                                <td>{{aerd.membre.ville}}</td>
+                                <td>
+                                    <a class="btn btn-light btn-sm"
+                                        href="{% url 'detail_aerd' aerd.id %}"> <i class="fa fa-eye text-success" data-toggle="modal" data-target=""></i>
+                                    </a>
+                                    
+                                </td>
+                            </tr> 
+                            {% endfor %}     
+                        </tbody>
+                    </table>
+            
+                    <div class="text-right">
+                        <a href="{% url 'create_aerd' %}" class="btn btn-success" style="font-size:12px;"> <i class="fa fa-plus-circle"></i> Ajout AERD</a>
+                    </div>
+            
+                    <div class="clearfix" style="font-size:13px;">
+            
+                            <div class="pagination" style="font-size:10px;">
+                                {% if aerd_list.has_previous %}
+                                    <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="?page=1"><i class="fa fa-angle-double-left"></i></a></li>
+                                    <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="{% url 'aerds' %}?page={{ aerd_list.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+                                {% endif %}
+                    
+                                <span class="current page-item page-link disabled " style="font-style: italic;font-size: 10px;">
+                                    Page {{ aerd_list.number}} <!--sur {{ aerd_list.paginator.num_pages }}-->
+                                </span>
+                    
+                    
+                                {% if aerd_list.has_next %}
+                                <a class="page-link" style="font-size:10px;" href="{% url 'aerds' %}?page={{ aerd_list.next_page_number}}"><i class="fa fa-angle-right"></i></a>
+                                <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="?page={{aerd_list.paginator.num_pages}}"> <i class="fa fa-angle-double-right"></i></a></li>
+                                {% endif %}
+                            </div>
+            
+            
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+<!--============== STAFF PANEL============-->
+{% elif user.is_authenticated and user.is_staff %}  
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
         
-        <div class="table-responsive">
+        <div class="table-responsive mt-5">
             <div class="table-wrapper mb-5">
                 <div class="table-title">
                     <div class="row">
-                        <div class="col-sm-8"><h2>Liste des <b>AERDS</b></h2></div>
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Liste des <b>AERD</b></h2></div>
                         <div class="col-sm-4"> <br>
                             
                         </div>
@@ -42,10 +158,10 @@
         <form class="d-flex" role="search">
             <input class="form-control me-2" name="q" type="search" placeholder="Recherche par Nom | Prénom | Ville" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        </form> <br>
         <!-- End Search zone -->
         
-                <table class="table table-striped table-hover table-bordered">
+                <table class="table table-striped table-hover table-bordered bg-white" style="font-size:12px;">
                     <thead >
                         <tr>
                             <th>#ID</th>
@@ -55,44 +171,82 @@
                             <th>Departement</th>
                             <th>Extension</th>
                             <th>Ville</th>
+                            <th>Détails</th>
                         </tr>
                     </thead>
                     <tbody id="mytable">
                         {% for aerd in aerd_list %}
-                        <tr>
-                            <td>{{aerd.id}}</td>
-                            <td><a href="{% url 'detail_aerd' aerd.id %}">{{aerd.membre.nom}} {{aerd.membre.prenom}}</a></td>
-                            <td>{{aerd.position}}</td>
-                            <!--td>{{aerd.formateur|default:""}}</!--td-->
-                            <td>{{aerd.situation}}</td>
-                            <td>{{aerd.departement}}</td>
-                            <td>{{aerd.extension.nom}}</td>
-                            <td>{{aerd.membre.ville}}</td>
-                        </tr> 
+                            <!-- Pour l'extension : Eglise centrale #Id=1-->
+                            {% if user.extension.id == 1 %}
+                                    {% if aerd.extension.id == 1 %}
+                                        <tr>
+                                            <td><a href="{% url 'update_aerd' aerd.id %}">{{aerd.id}}</a></td>
+                                            <td>{{aerd.membre.nom}} {{aerd.membre.prenom}}</td>
+                                            <td>{{aerd.position}}</td>
+                                            <!--td>{{aerd.formateur|default:""}}</!--td-->
+                                            <td>{{aerd.situation}}</td>
+                                            <td> {% for departement in aerd.departement.all %}{{departement.designation}}{% empty %} N/A {% endfor %}</td>
+                                            <td>{{aerd.extension.nom}}</td>
+                                            <td>{{aerd.membre.ville}}</td>
+                                            <td>
+                                                <a class="btn btn-light btn-sm"
+                                                    href="{% url 'detail_aerd' aerd.id %}"> <i class="fa fa-eye text-success" data-toggle="modal" data-target=""></i>
+                                                </a>
+                                                
+                                            </td>
+                                        </tr>
+                                        {% else %}
+                                        
+                                        {% endif %}
+                            {% endif%}
+
+                            <!-- Pour l'extension : Eglise centrale #Id=1-->
+                            {% if user.extension.id == 2 %}
+                                    {% if aerd.extension.id == 2 %}
+                                        <tr>
+                                            <td><a href="{% url 'update_aerd' aerd.id %}">{{aerd.id}}</a></td>
+                                            <td>{{aerd.membre.nom}} {{aerd.membre.prenom}}</td>
+                                            <td>{{aerd.position}}</td>
+                                            <!--td>{{aerd.formateur|default:""}}</!--td-->
+                                            <td>{{aerd.situation}}</td>
+                                            <td> {% for departement in aerd.departement.all %}{{departement.designation}}{% empty %} N/A {% endfor %}</td>
+                                            <td>{{aerd.extension.nom}}</td>
+                                            <td>{{aerd.membre.ville}}</td>
+                                            <td>
+                                                <a class="btn btn-light btn-sm"
+                                                    href="{% url 'detail_aerd' aerd.id %}"> <i class="fa fa-eye text-success" data-toggle="modal" data-target=""></i>
+                                                </a>
+                                                
+                                            </td>
+                                        </tr>
+                                        {% else %}
+                                        
+                                        {% endif %}
+                            {% endif%}
                         {% endfor %}     
                     </tbody>
                 </table>
         
                 <div class="text-right">
-                    <a href="{% url 'create_aerd' %}" class="btn btn-info">Ajouter un aerd</a>
+                    <a href="{% url 'create_aerd' %}" class="btn btn-success" style="font-size:12px;"> <i class="fa fa-plus-circle"></i> Ajout AERD</a>
                 </div>
         
-                <div class="clearfix">
+                <div class="clearfix" style="font-size:13px;">
         
                         <div class="pagination" style="font-size:10px;">
                             {% if aerd_list.has_previous %}
-                                <li class="page-item"><a class="page-link" href="?page=1"><i class="fa fa-angle-double-left"></i></a></li>
-                                <li class="page-item"><a class="page-link" href="{% url 'aerds' %}?page={{ aerd_list.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+                                <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="?page=1"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="{% url 'aerds' %}?page={{ aerd_list.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
                             {% endif %}
                 
-                            <span class="current page-item page-link disabled " style="font-style: italic;">
+                            <span class="current page-item page-link disabled " style="font-style: italic;font-size: 10px;">
                                 Page {{ aerd_list.number}} <!--sur {{ aerd_list.paginator.num_pages }}-->
                             </span>
                 
                 
                             {% if aerd_list.has_next %}
-                            <a class="page-link" href="{% url 'aerds' %}?page={{ aerd_list.next_page_number}}"><i class="fa fa-angle-right"></i></a>
-                            <li class="page-item"><a class="page-link" href="?page={{aerd_list.paginator.num_pages}}"> <i class="fa fa-angle-double-right"></i></a></li>
+                            <a class="page-link" style="font-size:10px;" href="{% url 'aerds' %}?page={{ aerd_list.next_page_number}}"><i class="fa fa-angle-right"></i></a>
+                            <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="?page={{aerd_list.paginator.num_pages}}"> <i class="fa fa-angle-double-right"></i></a></li>
                             {% endif %}
                         </div>
         
@@ -101,10 +255,316 @@
             </div>
         </div>
 
+        </div>
     </div>
-
 </div>
 
+<!--============== ADMIN PANEL===========-->
+{% elif user.is_authenticated and user.is_admin %}  
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+        
+        <div class="table-responsive mt-5">
+            <div class="table-wrapper mb-5">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Liste des <b>AERD</b></h2></div>
+                        <div class="col-sm-4"> <br>
+                            
+                        </div>
+                    </div>
+                    <br>
+                </div>
+        
+                <!-- Search zone -->
+        <!--div class="row p-4">
+            <div class="col-sm-6 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        Recherche
+                    </div>
+                    <form action="{% url 'membres' %}" method="post">
+                        <div class="card-body">
+                            {% csrf_token%}
+                            {{form.as_p}}
+                            <div class="text-right">
+                                <button class="btn btn-info" type="submit"><i class="fa fa-search" aria-hidden="true">Rechercher</i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </!--div-->
+        
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" name="q" type="search" placeholder="Recherche par Nom | Prénom | Ville" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> <br>
+        <!-- End Search zone -->
+        
+                <table class="table table-striped table-hover table-bordered bg-white" style="font-size:12px;">
+                    <thead >
+                        <tr>
+                            <th>#ID</th>
+                            <th>Noms et prenom</th>
+                            <th>Fonction</th>
+                            <th>Situation</th>
+                            <th>Departement</th>
+                            <th>Extension</th>
+                            <th>Ville</th>
+                            <th>Détails</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mytable">
+                        {% for aerd in aerd_list %}
+
+                            <!-- Pour l'extension : Eglise centrale #Id=1-->
+                            {% if user.extension.id == 1 %}
+                                    {% if aerd.extension.id == 1 %}
+                                        <tr>
+                                            <td><a href="{% url 'update_aerd' aerd.id %}">{{aerd.id}}</a></td>
+                                            <td>{{aerd.membre.nom}} {{aerd.membre.prenom}}</td>
+                                            <td>{{aerd.position}}</td>
+                                            <!--td>{{aerd.formateur|default:""}}</!--td-->
+                                            <td>{{aerd.situation}}</td>
+                                            <td> {% for departement in aerd.departement.all %}{{departement.designation}}{% empty %} N/A {% endfor %}</td>
+                                            <td>{{aerd.extension.nom}}</td>
+                                            <td>{{aerd.membre.ville}}</td>
+                                            <td>
+                                                <a class="btn btn-light btn-sm"
+                                                    href="{% url 'detail_aerd' aerd.id %}"> <i class="fa fa-eye text-success" data-toggle="modal" data-target=""></i>
+                                                </a>
+                                                
+                                            </td>
+                                        </tr>
+                                        {% else %}
+                                        
+                                        {% endif %}
+                            {% endif%}
+
+                            <!-- Pour l'extension : Eglise centrale #Id=1-->
+                            {% if user.extension.id == 2 %}
+                                    {% if aerd.extension.id == 2 %}
+                                        <tr>
+                                            <td><a href="{% url 'update_aerd' aerd.id %}">{{aerd.id}}</a></td>
+                                            <td>{{aerd.membre.nom}} {{aerd.membre.prenom}}</td>
+                                            <td>{{aerd.position}}</td>
+                                            <!--td>{{aerd.formateur|default:""}}</!--td-->
+                                            <td>{{aerd.situation}}</td>
+                                            <td> {% for departement in aerd.departement.all %}{{departement.designation}}{% empty %} N/A {% endfor %}</td>
+                                            <td>{{aerd.extension.nom}}</td>
+                                            <td>{{aerd.membre.ville}}</td>
+                                            <td>
+                                                <a class="btn btn-light btn-sm"
+                                                    href="{% url 'detail_aerd' aerd.id %}"> <i class="fa fa-eye text-success" data-toggle="modal" data-target=""></i>
+                                                </a>
+                                                
+                                            </td>
+                                        </tr>
+                                        {% else %}
+                                        
+                                        {% endif %}
+                            {% endif%}
+                        {% endfor %}     
+                    </tbody>
+                </table>
+        
+                <div class="text-right">
+                    <a href="{% url 'create_aerd' %}" class="btn btn-success" style="font-size:12px;"> <i class="fa fa-plus-circle"></i> Ajout AERD</a>
+                </div>
+        
+                <div class="clearfix" style="font-size:13px;">
+        
+                        <div class="pagination" style="font-size:10px;">
+                            {% if aerd_list.has_previous %}
+                                <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="?page=1"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="{% url 'aerds' %}?page={{ aerd_list.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+                            {% endif %}
+                
+                            <span class="current page-item page-link disabled " style="font-style: italic;font-size: 10px;">
+                                Page {{ aerd_list.number}} <!--sur {{ aerd_list.paginator.num_pages }}-->
+                            </span>
+                
+                
+                            {% if aerd_list.has_next %}
+                            <a class="page-link" style="font-size:10px;" href="{% url 'aerds' %}?page={{ aerd_list.next_page_number}}"><i class="fa fa-angle-right"></i></a>
+                            <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="?page={{aerd_list.paginator.num_pages}}"> <i class="fa fa-angle-double-right"></i></a></li>
+                            {% endif %}
+                        </div>
+        
+        
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+<!--============== USER WITHOUT EXTENSION =========== "DONE"-->
+{% elif user.is_authenticated and not user.extension.id %}
+<div class="content-wrapper">
+    
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="container-fluid">
+            <p class="text-danger"><i class="fa fa-warning fa-2x"></i> Veuillez contacter <a href="mailto:popaulnzongo@gmail.com">l'administrateur</a> afin de passer votre demande d'affiliation à une extension pour avoir accès aux contenus.</p> 
+        </div><!-- /.container-fluid -->
+        
+    </section>
+    <!-- /.content -->
+</div>
+
+<!--============== USER PANEL===========-->
+
+{% else %}
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+        
+        <div class="table-responsive mt-5">
+            <div class="table-wrapper mb-5">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Liste des <b>AERD</b></h2></div>
+                        <div class="col-sm-4"> <br>
+                            
+                        </div>
+                    </div>
+                    <br>
+                </div>
+        
+                <!-- Search zone -->
+        <!--div class="row p-4">
+            <div class="col-sm-6 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        Recherche
+                    </div>
+                    <form action="{% url 'membres' %}" method="post">
+                        <div class="card-body">
+                            {% csrf_token%}
+                            {{form.as_p}}
+                            <div class="text-right">
+                                <button class="btn btn-info" type="submit"><i class="fa fa-search" aria-hidden="true">Rechercher</i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </!--div-->
+        
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" name="q" type="search" placeholder="Recherche par Nom | Prénom | Ville" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> <br>
+        <!-- End Search zone -->
+        
+                <table class="table table-striped table-hover table-bordered bg-white" style="font-size:12px;">
+                    <thead >
+                        <tr>
+                            <th>#ID</th>
+                            <th>Noms et prenom</th>
+                            <th>Fonction</th>
+                            <th>Situation</th>
+                            <th>Departement</th>
+                            <th>Extension</th>
+                            <th>Ville</th>
+                            <th>Détails</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mytable">
+                        {% for aerd in aerd_list %}
+                            <!-- Pour l'extension : Eglise centrale #Id=1-->
+                            {% if user.extension.id == 1 %}
+                                    {% if aerd.extension.id == 1 %}
+                                        <tr>
+                                            <td><a href="{% url 'update_aerd' aerd.id %}">{{aerd.id}}</a></td>
+                                            <td>{{aerd.membre.nom}} {{aerd.membre.prenom}}</td>
+                                            <td>{{aerd.position}}</td>
+                                            <!--td>{{aerd.formateur|default:""}}</!--td-->
+                                            <td>{{aerd.situation}}</td>
+                                            <td> {% for departement in aerd.departement.all %}{{departement.designation}}{% empty %} N/A {% endfor %}</td>
+                                            <td>{{aerd.extension.nom}}</td>
+                                            <td>{{aerd.membre.ville}}</td>
+                                            <td>
+                                                <a class="btn btn-light btn-sm"
+                                                    href="{% url 'detail_aerd' aerd.id %}"> <i class="fa fa-eye text-success" data-toggle="modal" data-target=""></i>
+                                                </a>
+                                                
+                                            </td>
+                                        </tr>
+                                        {% else %}
+                                        
+                                        {% endif %}
+                            {% endif%}
+
+                            <!-- Pour l'extension : Eglise centrale #Id=1-->
+                            {% if user.extension.id == 2 %}
+                                    {% if aerd.extension.id == 2 %}
+                                        <tr>
+                                            <td><a href="{% url 'update_aerd' aerd.id %}">{{aerd.id}}</a></td>
+                                            <td>{{aerd.membre.nom}} {{aerd.membre.prenom}}</td>
+                                            <td>{{aerd.position}}</td>
+                                            <!--td>{{aerd.formateur|default:""}}</!--td-->
+                                            <td>{{aerd.situation}}</td>
+                                            <td> {% for departement in aerd.departement.all %}{{departement.designation}}{% empty %} N/A {% endfor %}</td>
+                                            <td>{{aerd.extension.nom}}</td>
+                                            <td>{{aerd.membre.ville}}</td>
+                                            <td>
+                                                <a class="btn btn-light btn-sm"
+                                                    href="{% url 'detail_aerd' aerd.id %}"> <i class="fa fa-eye" data-toggle="modal" data-target=""></i>
+                                                </a>
+                                                
+                                            </td>
+                                        </tr>
+                                        {% else %}
+                                        
+                                        {% endif %}
+                            {% endif%}
+                        {% endfor %}     
+                    </tbody>
+                </table>
+                {% if not user.extension.id %}
+                            <p class="text-danger"><i class="fa fa-warning fa-2x"></i> Veuillez contacter <a href="mailto:popaulnzongo@gmail.com">l'administrateur</a> afin de passer votre demande d'affiliation à une extension pour avoir accès aux contenus.</p> 
+                    {% endif %}
+        
+                <div class="text-right">
+                    <a href="{% url 'create_aerd' %}" class="btn btn-success" style="font-size:12px;"> <i class="fa fa-plus-circle"></i> Ajout AERD</a>
+                </div>
+        
+                <div class="clearfix" style="font-size:13px;">
+        
+                        <div class="pagination" style="font-size:10px;">
+                            {% if aerd_list.has_previous %}
+                                <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="?page=1"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="{% url 'aerds' %}?page={{ aerd_list.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+                            {% endif %}
+                
+                            <span class="current page-item page-link disabled " style="font-style: italic;font-size: 10px;">
+                                Page {{ aerd_list.number}} <!--sur {{ aerd_list.paginator.num_pages }}-->
+                            </span>
+                
+                
+                            {% if aerd_list.has_next %}
+                            <a class="page-link" style="font-size:10px;" href="{% url 'aerds' %}?page={{ aerd_list.next_page_number}}"><i class="fa fa-angle-right"></i></a>
+                            <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="?page={{aerd_list.paginator.num_pages}}"> <i class="fa fa-angle-double-right"></i></a></li>
+                            {% endif %}
+                        </div>
+        
+        
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+{% endif%}
 
 
 {% endblock  %}

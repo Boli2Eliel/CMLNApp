@@ -1,0 +1,556 @@
+{% extends "partials/base.html" %}
+
+{% block content  %}
+
+
+
+<!--============== SUPERUSER ==============-->
+{% if user.is_authenticated and user.is_superuser %}
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+        
+        <div class="table-responsive mt-5">
+            <div class="table-wrapper mb-5">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Liste des <b>Activités</b></h2></div>
+                        <div class="col-sm-4"> <br>
+                            
+                        </div>
+                    </div>
+                    <br>
+                </div>
+        
+                <!-- Search zone -->
+        <!--div class="row p-4">
+            <div class="col-sm-6 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        Recherche
+                    </div>
+                    <form action="{% url 'membres' %}" method="post">
+                        <div class="card-body">
+                            {% csrf_token%}
+                            {{form.as_p}}
+                            <div class="text-right">
+                                <button class="btn btn-info" type="submit"><i class="fa fa-search" aria-hidden="true">Rechercher</i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </!--div-->
+        
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" name="q" type="search" placeholder="Recherche par Nom | Prénom | Ville" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> <br>
+        <!-- End Search zone -->
+        
+                <table class="table table-striped table-hover table-bordered bg-white" style="font-size:12px;">
+                    <thead >
+                        <tr>
+                            <th>#ID</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Thème</th>
+                            <th>Intervenant</th>
+                            <th>Extension</th>
+                            <th>Total participants</th>
+                            <th>Détails</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mytable">
+                        {% for activite in activite_list %}
+                        <tr>
+                            <td><a href="#">{{activite.id}}</a></td>
+                            <td>{{activite.type}}</td>
+                            <td>{{activite.date}}</td>
+                            <!--td>{{activite.formateur|default:""}}</!--td-->
+                            <td>{{activite.theme}}</td>
+                            <td>{{activite.intervenant}}</td>
+                            <td>{{activite.extension.nom}}</td>
+                            <td>{{activite.total_participants}}</td>
+                            <td>
+                                <a class="btn btn-light btn-sm"
+                                    href="{% url 'detail_activite' activite.id %}"> <i class="fa fa-eye" data-toggle="modal" data-target=""></i>
+                                </a>
+                                
+                            </td>
+                        </tr> 
+                        {% endfor %}     
+                    </tbody>
+                </table>
+        
+                <div class="text-right">
+                    <a href="{% url 'create_activite' %}" class="btn btn-success" style="font-size:12px;"> <i class="fa fa-plus-circle"></i> Ajout activite</a>
+                </div>
+        
+                <div class="clearfix" style="font-size:13px;">
+        
+                        <div class="pagination" style="font-size:10px;">
+                            {% if activite_list.has_previous %}
+                                <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="?page=1"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="{% url 'activites' %}?page={{ activite_list.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+                            {% endif %}
+                
+                            <span class="current page-item page-link disabled " style="font-style: italic;font-size: 10px;">
+                                Page {{ activite_list.number}} <!--sur {{ activite_list.paginator.num_pages }}-->
+                            </span>
+                
+                
+                            {% if activite_list.has_next %}
+                            <a class="page-link" style="font-size:10px;" href="{% url 'activites' %}?page={{ activite_list.next_page_number}}"><i class="fa fa-angle-right"></i></a>
+                            <li class="page-item" style="font-size:10px;"><a class="page-link" style="font-size:10px;" href="?page={{activite_list.paginator.num_pages}}"> <i class="fa fa-angle-double-right"></i></a></li>
+                            {% endif %}
+                        </div>
+        
+        
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+<!--============== STAFF ============-->
+{% elif user.is_authenticated and user.is_staff %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+        
+        <div class="table-responsive mt-5" style="font-size:12px;">
+            <div class="table-wrapper mb-5">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Liste des <b>Activités</b></h2></div>
+                        <div class="col-sm-4"> <br>
+                            
+                        </div>
+                    </div>
+                    <br>
+                </div>
+        
+                <!-- Search zone -->
+        <!--div class="row p-4">
+            <div class="col-sm-6 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        Recherche
+                    </div>
+                    <form action="{% url 'membres' %}" method="post">
+                        <div class="card-body">
+                            {% csrf_token%}
+                            {{form.as_p}}
+                            <div class="text-right">
+                                <button class="btn btn-info" type="submit"><i class="fa fa-search" aria-hidden="true">Rechercher</i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </!--div-->
+        
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" name="q" type="search" placeholder="Recherche par Nom | Prénom | Ville" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <!-- End Search zone -->
+        
+                <table class="table table-striped table-hover table-bordered bg-white">
+                    <thead >
+                        <tr>
+                            <th>#ID</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Thème</th>
+                            <th>Intervenant</th>
+                            <th>Extension</th>
+                            <th>Total participants</th>                            
+                            <th>Action</th>                            
+                        </tr>
+                    </thead>
+                    <tbody id="mytable">
+                        {% for activite in activite_list %}
+                        <tr>
+                            <td><a href="#">{{activite.id}}</a></td>
+                            <td>{{activite.type}}</td>
+                            <td>{{activite.date}}</td>
+                            <!--td>{{activite.formateur|default:""}}</!--td-->
+                            <td>{{activite.theme}}</td>
+                            <td>{{activite.intervenant}}</td>
+                            <td>{{activite.extension.nom}}</td>
+                            <td>{{activite.total_participants}}</td>
+                            <td>
+                                <a class="btn btn-light btn-sm"
+                                    href="{% url 'detail_activite' activite.id %}"> <i class="fa fa-eye" data-toggle="modal" data-target=""></i>
+                                </a>
+                            </td>
+                        </tr> 
+                        {% endfor %}     
+                    </tbody>
+                </table>
+        
+                <div class="text-right">
+                    <a href="{% url 'create_activite' %}" class="btn btn-info" style="font-size:12px;"> <i class="fa fa-plus-circle"></i> Ajout activite</a>
+                </div>
+        
+                <div class="clearfix" style="font-size:13px;">
+        
+                        <div class="pagination" style="font-size:10px;">
+                            {% if activite_list.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page=1"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li class="page-item"><a class="page-link" href="{% url 'activites' %}?page={{ activite_list.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+                            {% endif %}
+                
+                            <span class="current page-item page-link disabled " style="font-style: italic;">
+                                Page {{ activite_list.number}} <!--sur {{ activite_list.paginator.num_pages }}-->
+                            </span>
+                
+                
+                            {% if activite_list.has_next %}
+                            <a class="page-link" href="{% url 'activites' %}?page={{ activite_list.next_page_number}}"><i class="fa fa-angle-right"></i></a>
+                            <li class="page-item"><a class="page-link" href="?page={{activite_list.paginator.num_pages}}"> <i class="fa fa-angle-double-right"></i></a></li>
+                            {% endif %}
+                        </div>
+        
+        
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+<!--============== ADMIN ===========-->
+{% elif user.is_authenticated and user.is_admin %} 
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+        
+        <div class="table-responsive mt-5" style="font-size:12px;">
+            <div class="table-wrapper mb-5">
+                <div class="table-title">
+                    {% if user.extension.id == 1 %}
+                    <h5 class="m-0"><span class=" badge badge-secondary p-1" style="font-size: 18px;" >{{user.extension.nom}}~[{{user.extension.description}}]</span> <span class=" badge badge-success p-1" style="font-size: 15px;">{{today}}</span></h5>
+                    {% elif user.extension.id == 2 %}
+                    <h5 class="m-0"><span class=" badge badge-secondary p-1" style="font-size: 18px;" >CMLN - {{user.extension.description}} </span> <span class=" badge badge-success p-1" style="font-size: 15px;">{{today}}</span></h5>
+                    {% else %}
+                        <h4 class="m-0"> CMLN </h4>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Liste des <b>Activités</b></h2></div>
+                        <div class="col-sm-4"> <br>
+                            
+                        </div>
+                    </div>
+                    <br>
+                </div>
+        
+                <!-- Search zone -->
+        <!--div class="row p-4">
+            <div class="col-sm-6 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        Recherche
+                    </div>
+                    <form action="{% url 'membres' %}" method="post">
+                        <div class="card-body">
+                            {% csrf_token%}
+                            {{form.as_p}}
+                            <div class="text-right">
+                                <button class="btn btn-info" type="submit"><i class="fa fa-search" aria-hidden="true">Rechercher</i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </!--div-->
+        
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" name="q" type="search" placeholder="Recherche par Nom | Prénom | Ville" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <!-- End Search zone -->
+        
+                <table class="table table-striped table-hover table-bordered bg-white">
+                    <thead >
+                        <tr>
+                            <th>#ID</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Thème</th>
+                            <th>Intervenant</th>
+                            <th>Extension</th>
+                            <th>Total participants</th>                            
+                            <th>Action</th>                            
+                        </tr>
+                    </thead>
+                    <tbody id="mytable">
+                        {% for activite in activite_list %}
+                        <!-- Pour l'extension : Eglise centrale #Id=1-->
+                        
+                            {% if user.extension.id == 1 %}
+                                {% if activite.extension.id == 1 %}
+                                <tr>
+                                    <td><a href="#">{{activite.id}}</a></td>
+                                    <td>{{activite.type}}</td>
+                                    <td>{{activite.date}}</td>
+                                    <!--td>{{activite.formateur|default:""}}</!--td-->
+                                    <td>{{activite.theme}}</td>
+                                    <td>{{activite.intervenant}}</td>
+                                    <td>{{activite.extension.nom}}</td>
+                                    <td>{{activite.total_participants}}</td>
+                                    <td>
+                                        <a class="btn btn-light btn-sm"
+                                            href="{% url 'detail_activite' activite.id %}"> <i class="fa fa-eye" data-toggle="modal" data-target=""></i>
+                                        </a>
+                                    </td>
+                                </tr> 
+                                {% else %}
+                                {% endif %}
+
+                            {% else %}
+                            {% endif%}
+
+
+                        {% endfor %}
+                        
+                        <!-- Pour l'extension : Eglise CMLN BZV #Id=2-->
+                        {% for activite in activite_list %}
+                        {% if user.extension.id == 2 %}
+                            {% if activite.extension.id == 2 %}
+                            <tr>
+                                <td><a href="#">{{activite.id}}</a></td>
+                                <td>{{activite.type}}</td>
+                                <td>{{activite.date}}</td>
+                                <!--td>{{activite.formateur|default:""}}</!--td-->
+                                <td>{{activite.theme}}</td>
+                                <td>{{activite.intervenant}}</td>
+                                <td>{{activite.extension.nom}}</td>
+                                <td>{{activite.total_participants}}</td>
+                                <td>
+                                    <a class="btn btn-light btn-sm"
+                                        href="{% url 'detail_activite' activite.id %}"> <i class="fa fa-eye" data-toggle="modal" data-target=""></i>
+                                    </a>
+                                </td>
+                            </tr> 
+                            {% else %}
+                            {% endif %}
+
+                        {% else %}
+                        {% endif%}
+                        
+
+                    {% endfor %}  
+                </tbody>
+                </table>
+        
+                <div class="text-right">
+                    <a href="{% url 'create_activite' %}" class="btn btn-info" style="font-size:12px;"> <i class="fa fa-plus-circle"></i> Ajout activite</a>
+                </div>
+        
+                <div class="clearfix" style="font-size:13px;">
+        
+                        <div class="pagination" style="font-size:10px;">
+                            {% if activite_list.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page=1"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li class="page-item"><a class="page-link" href="{% url 'activites' %}?page={{ activite_list.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+                            {% endif %}
+                
+                            <span class="current page-item page-link disabled " style="font-style: italic;">
+                                Page {{ activite_list.number}} <!--sur {{ activite_list.paginator.num_pages }}-->
+                            </span>
+                
+                
+                            {% if activite_list.has_next %}
+                            <a class="page-link" href="{% url 'activites' %}?page={{ activite_list.next_page_number}}"><i class="fa fa-angle-right"></i></a>
+                            <li class="page-item"><a class="page-link" href="?page={{activite_list.paginator.num_pages}}"> <i class="fa fa-angle-double-right"></i></a></li>
+                            {% endif %}
+                        </div>
+        
+        
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+<!--============== USER WITHOUT EXTENSION =========== "DONE"-->
+{% elif user.is_authenticated and not user.extension.id %}
+<div class="content-wrapper">
+    
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="container-fluid">
+            <p class="text-danger"><i class="fa fa-warning fa-2x"></i> Veuillez contacter <a href="mailto:popaulnzongo@gmail.com">l'administrateur</a> afin de passer votre demande d'affiliation à une extension pour avoir accès aux contenus.</p> 
+        </div><!-- /.container-fluid -->
+        
+    </section>
+    <!-- /.content -->
+</div>
+
+<!--============== USER ===========-->
+{% else %}
+<div class="content-wrapper">
+    <div class="container">
+        {% if user.extension.id == 1 %}
+        <h5 class="m-0"><span class=" badge badge-secondary p-1" style="font-size: 18px;" >{{user.extension.nom}}~[{{user.extension.description}}]</span> <span class=" badge badge-success p-1" style="font-size: 15px;">{{today}}</span></h5>
+        {% elif user.extension.id == 2 %}
+        <h5 class="m-0"><span class=" badge badge-secondary p-1" style="font-size: 18px;" >CMLN - {{user.extension.description}} </span> <span class=" badge badge-success p-1" style="font-size: 15px;">{{today}}</span></h5>
+        {% else %}
+            <h4 class="m-0"> CMLN </h4>
+        {% endif %}
+        <div class="container-fluid">
+
+        <div class="table-responsive mt-5" style="font-size:12px;">
+            <div class="table-wrapper mb-5">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8 text-secondary" > <h2><i class="fa fa-list"></i> Liste des <b>Activités</b></h2></div>
+                        <div class="col-sm-4"> <br>
+                            
+                        </div>
+                    </div>
+                    <br>
+                </div>
+        
+                <!-- Search zone -->
+        <!--div class="row p-4">
+            <div class="col-sm-6 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        Recherche
+                    </div>
+                    <form action="{% url 'membres' %}" method="post">
+                        <div class="card-body">
+                            {% csrf_token%}
+                            {{form.as_p}}
+                            <div class="text-right">
+                                <button class="btn btn-info" type="submit"><i class="fa fa-search" aria-hidden="true">Rechercher</i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </!--div-->
+        
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" name="q" type="search" placeholder="Recherche par Nom | Prénom | Ville" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <!-- End Search zone -->
+        
+                <table class="table table-striped table-hover table-bordered bg-white">
+                    <thead >
+                        <tr>
+                            <th>#ID</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Thème</th>
+                            <th>Intervenant</th>
+                            <th>Extension</th>
+                            <th>Total participants</th>                            
+                            <th>Action</th>                            
+                        </tr>
+                    </thead>
+                    <tbody id="mytable">
+                        {% for activite in activite_list %}
+                        <!-- Pour l'extension : Eglise centrale #Id=1-->
+                        
+                            {% if user.extension.id == 1 %}
+                                {% if activite.extension.id == 1 %}
+                                <tr>
+                                    <td><a href="#">{{activite.id}}</a></td>
+                                    <td>{{activite.type}}</td>
+                                    <td>{{activite.date}}</td>
+                                    <!--td>{{activite.formateur|default:""}}</!--td-->
+                                    <td>{{activite.theme}}</td>
+                                    <td>{{activite.intervenant}}</td>
+                                    <td>{{activite.extension.nom}}</td>
+                                    <td>{{activite.total_participants}}</td>
+                                    <td>
+                                        <a class="btn btn-light btn-sm"
+                                            href="{% url 'detail_activite' activite.id %}"> <i class="fa fa-eye" data-toggle="modal" data-target=""></i>
+                                        </a>
+                                    </td>
+                                </tr> 
+                                {% else %}
+                                {% endif %}
+
+                            {% else %}
+                            {% endif%}
+
+
+                        {% endfor %}
+                        
+                        <!-- Pour l'extension : Eglise CMLN BZV #Id=2-->
+                        {% for activite in activite_list %}
+                        {% if user.extension.id == 2 %}
+                            {% if activite.extension.id == 2 %}
+                            <tr>
+                                <td><a href="#">{{activite.id}}</a></td>
+                                <td>{{activite.type}}</td>
+                                <td>{{activite.date}}</td>
+                                <!--td>{{activite.formateur|default:""}}</!--td-->
+                                <td>{{activite.theme}}</td>
+                                <td>{{activite.intervenant}}</td>
+                                <td>{{activite.extension.nom}}</td>
+                                <td>{{activite.total_participants}}</td>
+                                <td>
+                                    <a class="btn btn-light btn-sm"
+                                        href="{% url 'detail_activite' activite.id %}"> <i class="fa fa-eye" data-toggle="modal" data-target=""></i>
+                                    </a>
+                                </td>
+                            </tr> 
+                            {% else %}
+                            {% endif %}
+
+                        {% else %}
+                        {% endif%}
+                        
+
+                    {% endfor %}  
+                    </tbody>
+                </table>
+        
+                <div class="text-right">
+                    <a href="{% url 'create_activite' %}" class="btn btn-info" style="font-size:12px;"> <i class="fa fa-plus-circle"></i> Ajout activite</a>
+                </div>
+        
+                <div class="clearfix" style="font-size:13px;">
+        
+                        <div class="pagination" style="font-size:10px;">
+                            {% if activite_list.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page=1"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li class="page-item"><a class="page-link" href="{% url 'activites' %}?page={{ activite_list.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+                            {% endif %}
+                
+                            <span class="current page-item page-link disabled " style="font-style: italic;">
+                                Page {{ activite_list.number}} <!--sur {{ activite_list.paginator.num_pages }}-->
+                            </span>
+                
+                
+                            {% if activite_list.has_next %}
+                            <a class="page-link" href="{% url 'activites' %}?page={{ activite_list.next_page_number}}"><i class="fa fa-angle-right"></i></a>
+                            <li class="page-item"><a class="page-link" href="?page={{activite_list.paginator.num_pages}}"> <i class="fa fa-angle-double-right"></i></a></li>
+                            {% endif %}
+                        </div>
+        
+        
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+{% endif%}
+
+
+{% endblock  %}

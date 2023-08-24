@@ -1,0 +1,159 @@
+
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="container-fluid">
+            {% if object %}
+            <div class="container text-secondary mt-5">
+                <h3><i class="fas fa-user"></i> Modification d'une <strong>Activité</strong></h3>
+            </div>
+            {% else %}
+            <div class="container text-secondary mt-5">
+                <h3> <i class="fa fa-user"></i> Enregistrer <strong>une activité</strong> </h3> <hr>
+            </div> 
+            {% endif %}
+
+        <div class="container mt-5">
+
+        <div class="col ">
+
+            <form method="POST">
+                {% csrf_token%}
+                <div class="col-lg-8 container-fluid" style="font-size: 14px;">
+
+                    <div class="container-fluid">
+                        <div class="card">
+
+                            <div class="card-header">
+                                
+                                {% if object %} <!-- Si l'objet existe c-à-d lors de la modification-->
+                                    {% comment %}
+                                    {% if aerd.membre.sexe == "M" %} <!-- Si le AERD est un homme, on affiche l'avatar Homme -->
+                                        <i class="fa fa-info-circle text-info"></i> Informations -- <strong>{{aerd.membre.nom}} </strong>{{aerd.membre.prenom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_homme.png' %}" alt="Avatar" class="avatar">
+                                    {% else %} <!-- Si le AERD est une femme, on affiche l'avatar femme -->
+                                        <i class="fa fa-info-circle text-info"></i> Informations -- <strong>{{aerd.membre.nom}} </strong>{{aerd.membre.prenom}} <img style="width: 20px; height: 20px; vertical-align: middle; border-radius: 50%;" src="{% static 'img/Avatar_dame.png' %}" alt="Avatar" class="avatar">
+                                    {% endif %}
+                                    {% endcomment %}
+                                    
+                                {% else %} <!-- Sinon, on crée le AERD-->
+                                    Recueil <strong>d'informations</strong> <i class="fa fa-info-circle text-info"></i> 
+                                {% endif %}
+                            </div> 
+
+                            <div class="card-body" style="font-size: 14px;">
+                                {{form | crispy}}
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="row mt-3 ">
+                                            
+                                    <div class="col" >
+                                        {% if object %}
+                                            <a href="{% url 'detail_activite' object.id %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
+                                        {% else %}
+                                            <a href="{% url 'activites' %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
+                                        {% endif %}       
+                                    </div>
+                    
+                                    <div class=" col-sm-6">
+                                        <input class="btn btn-info" style="font-size:12px;" type="submit">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--div class="container mt-5">
+
+    <div class="col">
+
+        <div class="card">
+                <div class="card-header">
+                        Recueil <strong>d'informations</strong> <i class="fa fa-info-circle text-info"></i> 
+                </div>   
+
+            <div class="card-body" style="font-size:12px;">
+                <form method="POST" action="">
+                    {% csrf_token%}
+
+                    <div class="row">
+                        <div class="col form-group">
+                            <label for=""><strong> <i class="fa  fa-user-nurse"></i> Aerd</strong> :</label>
+                            <span class=" bg-info " >{{form.membre}}</span> <br>
+                        </div>
+                        
+                        <div class="col form-group">
+                            <label for=""><strong><i class="fa fa-sitemap"></i> Position</strong> :</label>
+                            {{form.position}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col form-group">
+                            <strong><i class="fa fa-list-alt"></i> Situation actuelle</strong> : {{form.situation}} <br>
+                        </div>
+                        
+                        <div class="col form-group">
+                            <strong><i class="fa fa-graduation-cap"></i> Niveau actuelle</strong> : {{form.niveau_formation}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                    <div class="col form-group">
+                            <i class="fa fa-calendar-alt"></i> Rôle : {{form.responsabilite}} <br>
+                        </div>
+
+                        <div class="col form-group">
+                            <i class="fa fa-church"></i> Extension : {{form.extension}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col form-group text-top">
+                            <label for=""><i class="fa fa-church"></i> Departement : </label>
+                            {{form.departement}} <br>
+                        </div>
+
+                        <div class="col form-group">
+                            <i class="fa fa-comments"></i> Commentaire : {{form.commentaire}} <br>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 ">
+                                    
+                        <div class="col">
+                            {% if object %}
+                                <a href="{% url 'detail_aerd' object.id %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
+                            {% else %}
+                                <a href="{% url 'create_aerd' %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
+                            {% endif %}       
+                        </div>
+
+                        <div class=" col-sm-6">
+                            <input class="btn btn-info" type="submit" style="font-size:12px;">
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+        
+    </div>
+</!--div-->
+
+{% endblock %}
+
+{% block script %} 
+{{ form.media}} 
+{% endblock %}

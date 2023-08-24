@@ -1,13 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deconnexion</title>
-</head>
-<body>
-    <h3>Vous êtes deconnecté de CMLN AERDSApp !</h3>
-    <p><a href="{% url 'login' %}"><strong>Reconnexion</strong></a></p>
-</body>
-</html>
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %}Logout {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+{% include 'partials/nav_logout.html' %} <!-- Ce tag nous permet d'inclure les pages componennt qui sont ds le dossier 'partials'-->
+
+<div class="container " style="max-width: 60%">
+
+    <section >
+
+      <div class="row justify-content-center form-bg-image" data-background-lg="/static/assets/img/illustrations/signin.svg">
+        
+      </div>
+
+
+      <div class="container justify-content-center ">
+        <div class="row ">
+          <div class="pt-lg-2 pb-lg-5">
+            <h1 class="fonty fs-1 ">IT'WATCH <i class="fa-solid fa-eye"></i></h1>
+            <h2 class="fonty">Gestion du parc Informatique</h2>
+          </div>
+          <p class="fonty ">Une bonne gestion du parc informatique d’entreprise permet de prévenir les défaillances et de réduire les coûts de fonctionnement du système informatique. <br>La gestion de parc informatique assure sa pérennité et constitue un enjeu majeur pour votre entreprise.<br>La gestion de parc informatique regroupe un ensemble de tâches visant à entretenir, développer et optimiser l’ensemble des ressources informatiques de l’entreprise.</p>
+          <div class=" mt-lg-4">
+          </div>
+      <br><br>
+
+        </div>
+      </div>
+    </section>
+</div>
+{% endblock  %}

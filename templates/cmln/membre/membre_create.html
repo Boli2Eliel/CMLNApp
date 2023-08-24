@@ -1,0 +1,108 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}$
+
+<div class="container">
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input class="form-control" type="text" id="nom" name="nom" value="" placeholder="Entrer le nom du nouveau membre">
+    </div>
+
+    <div class="form-group">
+      <label for="prenom">Prénom</label>
+      <input class="form-control" type="text" id="prenom" name="prenom" value="" placeholder="Entrer le prénom du nouveau membre">
+    </div>
+
+    <div class="form-group">
+      <label for="baptise">Sexe</label>
+      <input class="form-control" type="text" id="sexe" name="sexe" value="{{membre.sexe}}" placeholder="Veuillez choisir le genre">
+    </div>
+
+    <div class="form-group">
+      <label for="date_naissance">Date de naissance</label>
+      <input class="form-control" type="text" id="date_naissance" name="date_naissance" value="" placeholder="Date de naissance ">
+    </div>
+
+    <div class="form-group">
+      <label for="date_arrivee">Date d'Arrivée à CMLN</label>
+      <input class="form-control" type="text" id="date_arrivee" name="date_arrivee" value="" placeholder="Entrer la date d'Arrivée à CMLN">
+    </div>
+
+    <div class="form-group">
+      <label for="baptise">Baptisé</label>
+      <input class="form-control" type="text" id="baptise" name="baptise" value="{{membre.baptise}}" placeholder="Veuillez choisir">
+    </div>
+
+    <div class="form-group">
+      <label for="date_bapteme">Date de baptème</label>
+      <input class="form-control" type="text" id="date_bapteme" name="date_bapteme" value="" placeholder="Entrer la date de baptème">
+    </div>
+
+    <div class="form-group">
+      <label for="situation">Situation actuelle</label>
+      <input class="form-control" type="text" id="situation" name="situation" value="{{membre.situation}}" placeholder="Veuillez choisir">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input class="form-control" type="text" id="email" name="email" value="" placeholder=" Email">
+    </div>
+
+    <div class="form-group">
+      <label for="adresse">Adresse</label>
+      <input class="form-control" type="text" id="adresse" name="adresse" value="" placeholder="Adresse">
+    </div>
+
+    <div class="form-group">
+      <label for="ville">Ville</label>
+      <input class="form-control" type="text" id="ville" name="ville" value="" placeholder="Ville">
+    </div>
+
+    <div class="form-group">
+      <label for="extension">Extension</label>
+      <input class="form-control" type="text" id="extension" name="extension" value="{{membre.extension}}" placeholder="Extension">
+    </div>
+
+    <div class="form-group">
+      <label for="telephone">Téléphone</label>
+      <input class="form-control" type="text" id="telephone" name="telephone" value="" placeholder="Téléphone">
+    </div>
+
+    <div class="form-group">
+      <label for="commentaire">Commentaire</label>
+      <input class="form-control" type="text" id="commentaire" name="commentaire" value="" placeholder="Commentaire">
+    </div>
+
+    <div class="form-group">
+      <label for="sexe">Example select</label>
+      <select class="form-control" id="sexe" >
+        <option value="">{{membre.sexe}}</option>
+        
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect2">Example multiple select</label>
+      <select multiple class="form-control" id="exampleFormControlSelect2">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Example textarea</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+
+    <button type="submit">Save</button>
+
+  </form>
+</div>
+{% endblock  %}
+
+{% block script %} {{ form.media}} {% endblock %}
