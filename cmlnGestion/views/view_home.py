@@ -97,11 +97,21 @@ def index(request):
 
 
 
+    if aerds_count:
+        percentage = int((aerds_count / members_count) * 100)
+    else:
+        percentage =0
 
-    percentage = int((aerds_count / members_count) * 100)
+    if aerds_count:
+        percentage1 = int((aerds_count_1 / members_count_1) * 100)
+    else:
+        percentage1 =0
 
-    percentage1 = int((aerds_count_1 / members_count_1) * 100)
-    percentage2 = int((aerds_count_2 / members_count_2) * 100)
+    if aerds_count:
+        percentage2 = int((aerds_count_2 / members_count_2) * 100)
+    else:
+        percentage2 =0
+
 
     context = {
         'today': today,
