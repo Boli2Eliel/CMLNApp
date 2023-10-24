@@ -7,8 +7,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
 
-from cmlnGestion.forms.form_activite import ActiviteForm
-from cmlnGestion.models.model_aerd import Aerd, Activite
+from activite.models import Activite
+from activite.forms import ActiviteForm
+from cmlnGestion.models.model_aerd import Aerd
 from cmlnGestion.models.model_departement import Departement
 import datetime
 

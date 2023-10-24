@@ -3,7 +3,8 @@ from django import forms
 #from django.contrib.admin.views import autocomplete
 from django.forms import ModelForm
 
-from cmlnGestion.models.model_aerd import Aerd, Activite
+from activite.models import Activite
+from cmlnGestion.models.model_aerd import Aerd
 from cmlnGestion.models.model_membre import Membre
 
 class ActiviteBaseForm:

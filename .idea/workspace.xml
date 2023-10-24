@@ -5,11 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cea6a34-e886-4bae-b2f2-a0213b785626" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/mydb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/cmlnSchool.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cmlnSchool.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/activite/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/activite/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmlnGestion/forms/form_extension.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmlnGestion/views/view_extension.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stats/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmln/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmln/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmln/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmln/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmlnGestion/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnGestion/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmlnGestion/forms/form_activite.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmlnGestion/models/model_aerd.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnGestion/models/model_aerd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmlnGestion/models/model_membre.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnGestion/models/model_membre.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmlnGestion/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnGestion/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmlnGestion/views/view_activite.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmlnGestion/views/view_finances.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmlnGestion/views/view_home.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnGestion/views/view_home.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mydb.py" beforeDir="false" afterPath="$PROJECT_DIR$/mydb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cmln/membre/membre_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cmln/membre/membre_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cmln/membre/membre_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cmln/membre/membre_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/sidebar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,17 +63,17 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/PERSO/PopDev/DJANGO/invoicing2-main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/PERSO/PopDev/DJANGO/CMLN/CMLN_APP/activite&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\activite" />
+      <recent name="E:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\stats" />
       <recent name="E:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP" />
       <recent name="G:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\cmlnGestion\static\css" />
       <recent name="G:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\media\img" />
-      <recent name="G:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\cmlnGestion\static\img" />
-      <recent name="G:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\media" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\cmlnGestion" />
@@ -145,7 +160,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/cmln/settings.py</url>
-          <line>148</line>
+          <line>153</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

@@ -3,11 +3,13 @@ from django.db.models import Sum, F, Count
 from django.db.models.functions import ExtractMonth, ExtractYear, \
     Extract  # ExtractMonth pour extraire le mois dans une date
 from django.utils.translation import get_language, activate
-from cmlnGestion.models.model_membre import Membre, Extension
 from django.shortcuts import render
-from django.utils import timezone
 
-from cmlnGestion.models.model_aerd import Activite, Aerd
+from activite.models import Activite
+from cmlnGestion.models.model_aerd import Aerd
+from cmlnGestion.models.model_membre import Membre, Extension
+
+from django.utils import timezone
 import calendar
 import datetime
 import locale

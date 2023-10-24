@@ -1,6 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 
+from activite.models import Activite
 from cmlnGestion.models.model_aerd import *
 from cmlnGestion.models.model_departement import *
 from cmlnGestion.models.model_membre import *

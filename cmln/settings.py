@@ -43,10 +43,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #My Apps
+    # My Apps
     'cmlnGestion',
+    'stats',
+    'activite',
     'user',
     'authentication',
+    'gestionAvancee',
+
+    # Thirds
     'django_countries',
     'import_export',
     'crispy_forms',

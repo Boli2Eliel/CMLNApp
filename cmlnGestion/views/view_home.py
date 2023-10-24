@@ -3,11 +3,13 @@ from django.db.models import Sum, F, Count
 from django.db.models.functions import ExtractMonth, ExtractYear, \
     Extract  # ExtractMonth pour extraire le mois dans une date
 from django.utils.translation import get_language, activate
+
+from activite.models import Activite
 from cmlnGestion.models.model_membre import Membre, Extension
 from django.shortcuts import render
 from django.utils import timezone
 
-from cmlnGestion.models.model_aerd import Activite, Aerd
+from cmlnGestion.models.model_aerd import Aerd
 import calendar
 import datetime
 import locale
@@ -73,6 +75,7 @@ def index(request):
 
     # ==== Total des AERDs ====
     aerds_count = Aerd.objects.all().count()
+
     # Pour l'extension n°1
     aerds_count_1 = Aerd.objects.filter(extension__id=1).count()
     aerds_count_2 = Aerd.objects.filter(extension__id=2).count()
@@ -97,20 +100,20 @@ def index(request):
 
 
 
-    if aerds_count:
+    if aerds_count != 0:
         percentage = int((aerds_count / members_count) * 100)
     else:
-        percentage =0
+        percentage = "0"
 
-    if aerds_count:
+    if aerds_count_1 != 0:
         percentage1 = int((aerds_count_1 / members_count_1) * 100)
     else:
-        percentage1 =0
+        percentage1 = "0"
 
-    if aerds_count:
+    if aerds_count_2 != 0:
         percentage2 = int((aerds_count_2 / members_count_2) * 100)
     else:
-        percentage2 =0
+        percentage2 = "0"
 
 
     context = {

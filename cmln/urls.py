@@ -23,6 +23,8 @@ urlpatterns = [
     path('accounts/', include("authentication.urls")),
     path('admin/', admin.site.urls),
     path('', include("cmlnGestion.urls")),
+    path('', include("stats.urls")),
+    path('', include("activite.urls")),
     path('', include("user.urls")),
     path('', include("django.contrib.auth.urls")),
 
