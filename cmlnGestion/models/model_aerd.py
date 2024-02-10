@@ -2,9 +2,9 @@ from django.core.validators import RegexValidator
 from django_countries.fields import CountryField
 from django.db import models
 from enum import Enum
-from gestionAvancee.models import Extension
 from cmlnGestion.models.model_membre import *
 from cmlnGestion.models.model_departement import Departement
+from gestionAvancee.models import Extension
 
 
 SEXE =(
@@ -109,8 +109,6 @@ ACTIVITE =(
 
 )
 
-
-
 class Aerd(models.Model):
     objects = None
     created_at= models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -119,7 +117,9 @@ class Aerd(models.Model):
     position =  models.CharField( max_length=100, verbose_name="Position actuelle", choices=POSITION, default="Ouvrier")
     situation = models.CharField(max_length=100, verbose_name="Situation actuelle", choices=SITUATION, default="-")
     niveau_formation = models.CharField( max_length=100, blank=True, null=True, verbose_name="Niveau actuelle(si AERD confirmé ou en formation N+)", choices=[(tag.name, tag.value) for tag in NiveauFormationChoice])
-    departement = models.ManyToManyField(Departement)
+    ministere_1 = models.ForeignKey("Ministere", on_delete=models.CASCADE, related_name="aerds", null=True, blank=True, verbose_name="Ministère principal")
+    ministere_2 = models.ForeignKey("Ministere", on_delete=models.CASCADE, null=True, blank=True, verbose_name="Ministère secondaire")
+    #departement = models.ManyToManyField(Departement)
     responsabilite = models.CharField( max_length=100, blank=True, null=True, verbose_name="Role")
     extension = models.ForeignKey(Extension, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Extension")
     inactif = models.BooleanField(default=False, verbose_name="Desactivé (Ne cocher que si vous ne souhaitez plus gérer ce AERD dans l'application)")

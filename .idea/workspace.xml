@@ -5,26 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cea6a34-e886-4bae-b2f2-a0213b785626" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/activite/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/activite/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmlnGestion/forms/form_extension.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmlnGestion/views/view_extension.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stats/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestionAvancee/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestionAvancee/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/authentication/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/authentication/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmln/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmln/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmln/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmln/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmlnGestion/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnGestion/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmlnGestion/forms/form_activite.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmlnGestion/forms/form_aerd.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnGestion/forms/form_aerd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmlnGestion/forms/form_extension.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmlnGestion/models/model_aerd.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnGestion/models/model_aerd.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmlnGestion/models/model_membre.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnGestion/models/model_membre.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmlnGestion/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnGestion/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmlnGestion/views/view_activite.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmlnGestion/views/view_finances.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmlnGestion/views/view_home.py" beforeDir="false" afterPath="$PROJECT_DIR$/cmlnGestion/views/view_home.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmlnGestion/views/view_extension.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gestionAvancee/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/gestionAvancee/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gestionAvancee/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/gestionAvancee/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mydb.py" beforeDir="false" afterPath="$PROJECT_DIR$/mydb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/cmln/membre/membre_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cmln/membre/membre_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cmln/membre/membre_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cmln/membre/membre_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/extensions/extension_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/extensions/extension_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/extensions/extension_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/extensions/extension_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/extensions/extensions.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/extensions/extensions.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/includes/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,20 +63,21 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.mydb.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/PERSO/PopDev/DJANGO/CMLN/CMLN_APP/activite&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+    &quot;last_opened_file_path&quot;: &quot;E:/PERSO/PopDev/DJANGO/hb_app&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\gestionAvancee" />
       <recent name="E:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\activite" />
       <recent name="E:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\stats" />
       <recent name="E:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP" />
       <recent name="G:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\cmlnGestion\static\css" />
-      <recent name="G:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\media\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\PERSO\PopDev\DJANGO\CMLN\CMLN_APP\cmlnGestion" />
@@ -86,6 +90,7 @@
   <component name="RunManager" selected="Python.mydb">
     <configuration name="0002_aerd_membre_delete_personne_aerd_formateur" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="cmlnSchool" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -107,6 +112,7 @@
     </configuration>
     <configuration name="mydb" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="cmlnSchool" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -132,6 +138,13 @@
         <item itemvalue="Python.0002_aerd_membre_delete_personne_aerd_formateur" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

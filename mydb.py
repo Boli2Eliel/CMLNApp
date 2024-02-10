@@ -9,7 +9,8 @@ import mysql.connector
 dataBase = mysql.connector.connect(
 	host = 'localhost',
 	user = 'root',
-	passwd = ''
+	port = '3306',
+	passwd = 'Monboli1309@@'
 
 	)
 
@@ -17,6 +18,6 @@ dataBase = mysql.connector.connect(
 cursorObject = dataBase.cursor()
 
 # Create a database
-cursorObject.execute("CREATE DATABASE cmln_app")
+cursorObject.execute("CREATE DATABASE cmln")
 
 print("All Done!")

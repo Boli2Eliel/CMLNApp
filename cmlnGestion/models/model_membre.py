@@ -10,22 +10,25 @@ from gestionAvancee.models import Extension
 def get_profile_image_filepath(self, filename):
     return f'profile_images/{str(self.pk)}/{"profile_image.png"}'
 
+
 def get_default_profile_image():
     return 'img/avatar.jpg'
+
+
 class SexeChoice(Enum):
     F = "Féminin"
     M = "Masculin"
+
 
 class OuiNonChoice(Enum):
     OUI = "OUI"
     NON = "NON"
 
-class SituationChoice(Enum):
 
+class SituationChoice(Enum):
     NOUVEAU = "Nouvel arrivant"
     INTEGRATION = "En cours d'intégration - N1"
     AERD = 'Aerd'
-
 
 
 class Membre(models.Model):
@@ -43,17 +46,19 @@ class Membre(models.Model):
 
     )
 
-    created_at= models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
-    prenom = models.CharField( max_length=100, blank=True, null=True)
-    nom = models.CharField( max_length=100, )
-    sexe = models.CharField(max_length=20, blank=True, null=True, verbose_name="Sexe", choices=[(tag.name, tag.value) for tag in SexeChoice])
+    prenom = models.CharField(max_length=100)
+    nom = models.CharField(max_length=100, )
+    sexe = models.CharField(max_length=20, blank=True, null=True, verbose_name="Sexe",
+                            choices=[(tag.name, tag.value) for tag in SexeChoice])
     date_naissance = models.DateField(null=True, blank=True)
     date_arrivee = models.DateField(verbose_name="Date d'arrivée à CMLN", blank=True, null=True)
-    baptise = models.CharField(max_length=100, blank=True, null=True, verbose_name="Baptisé", choices=[(tag.name, tag.value) for tag in OuiNonChoice])
+    baptise = models.CharField(max_length=100, default="-", verbose_name="Baptisé",
+                               choices=[(tag.name, tag.value) for tag in OuiNonChoice])
     date_bapteme = models.DateField(verbose_name="Date de bapteme(par immersion)", null=True, blank=True)
     situation = models.CharField(max_length=100, blank=True, null=True, verbose_name="Situation actuelle",
-                                choices=[(tag.name, tag.value) for tag in SituationChoice])
+                                 choices=[(tag.name, tag.value) for tag in SituationChoice])
     etat_civil = models.CharField(max_length=60, null=True, blank=True, choices=ETAT_CIVIL)
     email = models.CharField(max_length=150, blank=True, null=True)
     adresse = models.CharField(max_length=100, blank=True, null=True)
@@ -70,7 +75,7 @@ class Membre(models.Model):
                                       default=get_default_profile_image)
 
     class Meta:
-        unique_together = [[ 'prenom', 'nom']]
+        unique_together = [['prenom', 'nom']]
 
     def __str__(self):
         return f"{self.prenom} {self.nom}"
@@ -83,7 +88,6 @@ class Membre(models.Model):
 
     def get_extension_str(self):
         return f"{self.extension.description}"
-    
 
     def is_from_nouveau(self):
         return self.situation == SituationChoice.NOUVEAU.name

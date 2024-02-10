@@ -9,11 +9,11 @@
         <div class="container-fluid">
             {% if object %}
             <div class="container text-secondary mt-5">
-                <h3><i class="fas fa-user"></i> Modification d'une <strong>extension</strong></h3>
+                <h3><i class="fas fa-user"></i> Modification d'un <strong>ministère</strong></h3>
             </div>
             {% else %}
             <div class="container text-secondary mt-5">
-                <h3> <i class="fa fa-user"></i> Nouvelle <strong>extension</strong> </h3> <hr>
+                <h3> <i class="fa fa-user"></i> Nouveau<strong>ministère</strong> </h3> <hr>
             </div> 
             {% endif %}
 
@@ -30,10 +30,10 @@
 
                             <div class="card-header">
                                 {% if object %} <!-- Si l'objet existe c-à-d lors de la modification-->
-                                    <i class="fa fa-info-circle text-info"></i> Informations -- <strong>{{extension.nom}} </strong>
+                                    <i class="fa fa-info-circle text-info"></i> Informations -- <strong>{{ministere.designation}} </strong>
                                     
                                 {% else %} <!-- Sinon, on crée le AERD-->
-                                    Recueil <strong>d'informations extension</strong> <i class="fa fa-info-circle text-info"></i> 
+                                    Recueil <strong>d'informations ministere</strong> <i class="fa fa-info-circle text-info"></i> 
                                 {% endif %}
                             </div> 
 
@@ -46,9 +46,9 @@
                                             
                                     <div class="col" >
                                         {% if object %}
-                                            <a href="{% url 'avancee:detail_extension' object.id %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
+                                            <a href="{% url 'avancee:detail_ministere' object.id %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
                                         {% else %}
-                                            <a href="{% url 'avancee:extensions' %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
+                                            <a href="{% url 'avancee:ministeres' %}" class="btn btn-secondary" style="font-size:12px;">Annuler</a>
                                         {% endif %}       
                                     </div>
                     

@@ -7,6 +7,7 @@ Copyright (c) 2019 - present AppSeed.us
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
+from .models import Account
 
 
 def login_view(request):
@@ -54,3 +55,8 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+
+def users_list(request):
+    users = Account.objects.all()
+
+    return render(request, "accounts/users_list.html", {"users": users})

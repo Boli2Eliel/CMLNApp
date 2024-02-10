@@ -1,11 +1,10 @@
-{% extends "partials/base.html" %}
+HEllo{% extends "partials/base.html" %}
 
 {% block content  %}
 
 <!--============== SUPERUSER PANEL==============-->
     {% if user.is_authenticated and user.is_superuser %}
     <div class="content-wrapper">
-        
         <div class="container">
             <div class="container-fluid">
                 <div class="table-responsive mt-5">

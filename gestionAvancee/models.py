@@ -11,7 +11,7 @@ class Extension(models.Model):
     telephone_regex = RegexValidator(
         regex="[0-9]{9}", message="Veuillez entrer un numéro de téléphone valide"
     )
-    telephone_1 = models.CharField(validators=[telephone_regex], max_length=100, blank=True, null=True,verbose_name="Standard" )
+    telephone_1 = models.CharField(validators=[telephone_regex], max_length=100, blank=True, null=True,verbose_name="Téléphone" )
     adresse = models.CharField(max_length=200, verbose_name="Adresse", null=True, blank=True)
     ville = models.CharField(max_length=150, null=True, blank=True, verbose_name="Ville",)
     pays = CountryField(blank_label='(Choisir Pays)', null=True, blank=True, verbose_name="Pays",)

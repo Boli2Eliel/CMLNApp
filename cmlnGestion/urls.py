@@ -1,22 +1,17 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import DetailView
 
 from stats import views
 from .models.model_aerd import Aerd
 from .models.model_membre import Membre
-from .views import view_home, view_membre, view_aerd, view_extension
+from .views import view_home, view_membre, view_aerd
 from .views.view_membre import MembreAutocomplete
 
 urlpatterns = [
     path('', view_home.index, name="home"),
 
-    # Extensions
-    path('extensions/', view_extension.list_extension, name="extensions"),
-    path('extension/create', view_extension.CreateExtension.as_view(), name="create_extension"),
-    path('extension/update/<int:pk>', view_extension.UpdateExtension.as_view(), name="update_extension"),
-    path('extension/<int:pk>', view_extension.DetailExtension.as_view(), name="detail_extension"),
-    path('delete_extension/<int:id>', view_extension.delete_extension, name='delete_extension'),
+
 
     # DASHBOARD
     path('dashboard1/', view_home.dashboard1, name="dashboard1"),
