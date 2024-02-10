@@ -27,6 +27,7 @@ urlpatterns = [
     path('', include("activite.urls")),
     path('', include("user.urls")),
     path('', include("django.contrib.auth.urls")),
+    path('', include('gestionAvancee.urls')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #for display media profile cf. "MEDIA-ROOT" in settings
